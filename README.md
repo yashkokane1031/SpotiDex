@@ -1,94 +1,186 @@
-# SpotiDex
+# 💽 SpotiDex
 
-> **SpotiDex — a pixel-art Spotify now-playing companion**
+<div align="center">
 
-A retro hi-fi pixel-art Spotify desktop player and streaming companion featuring spinning vinyl records, dynamic album palette extraction, responsive audio visualizers, synchronized lyrics, queue management, and an OBS-ready overlay mode.
+```
+  ███████╗██████╗  ██████╗ ████████╗██╗██████╗ ███████╗██╗  ██╗
+  ██╔════╝██╔══██╗██╔═══██╗╚══██╔══╝██║██╔══██╗██╔════╝╚██╗██╔╝
+  ███████╗██████╔╝██║   ██║   ██║   ██║██║  ██║█████╗   ╚███╔╝ 
+  ╚════██║██╔═══╝ ██║   ██║   ██║   ██║██║  ██║██╔══╝   ██╔██╗ 
+  ███████║██║     ╚██████╔╝   ██║   ██║██████╔╝███████╗██╔╝ ██╗
+  ╚══════╝╚═╝      ╚═════╝    ╚═╝   ╚═╝╚═════╝ ╚══════╝╚═╝  ╚═╝
+```
+
+### *A retro hi-fi pixel-art Spotify companion with dynamic album-art theming.*
+
+[![Vite](https://img.shields.io/badge/Vite-8.x-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
+[![React](https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev/)
+[![Spotify API](https://img.shields.io/badge/Spotify-Web_API-1DB954?style=for-the-badge&logo=spotify&logoColor=white)](https://developer.spotify.com/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
+
+[Features](#-what-makes-spotidex-different) • [Quickstart](#-getting-started) • [OBS Overlay](#-obs-studio-overlay-mode) • [Keyboard Shortcuts](#-keyboard-shortcuts) • [Known Limitations](#-real-talk-known-limitations)
+
+</div>
+
+---
+
+## 📻 Why SpotiDex?
+
+Modern streaming apps are convenient, but they're sterile. Flat gray rectangles, infinite scrolling menus, and zero tactile soul.
+
+**SpotiDex** turns your Spotify session into a nostalgic desktop shrine:
+- A turntable that actually spins with your music.
+- A mechanical tonearm that lifts, drops, and returns with track changes.
+- Vinyl records you can grab and flick across the screen to skip songs.
+- Dynamic color alchemy that bathes your display in the hues of whatever album is spinning—with automated WCAG contrast correction so it never becomes an illegible neon mess.
+- An animated, deterministic 36-bar LED audio visualizer.
+- A 3D perspective queue carousel and real-time karaoke lyrics.
+- A transparent, zero-overhead HUD mode built specifically for OBS streamers.
+
+No servers, no hidden backends, and no proprietary lock-in. Just pure client-side React and PKCE OAuth running straight from your browser.
+
+---
+
+## 📸 Screenshots & Vibe Check
 
 <!-- add screenshots here -->
 
----
+```
++-------------------------------------------------------------------------+
+| [● REC]  SPOTIDEX HI-FI STEREO COMPONENT                   [DEVICE: PC] |
+|-------------------------------------------------------------------------|
+|                                                                         |
+|      /-------------\      ♪ THE LESS I KNOW THE BETTER                  |
+|     |   (((@)))     |       Tame Impala — Currents                      |
+|     |  ( ( @ ) )    |                                                   |
+|      \-------------/      [ 01:24 ] ========o------------- [ 03:36 ]    |
+|        \__ \_______       [⏮]  [▶]  [⏭]  [🔀]  [🔁]  VOL: [====--]     |
+|                                                                         |
+|   |i|i|i|i|i|i|i|i|i|i|i|i|i|i|i|i|i|i|i|i|i|i|i|i|i|i|i|i|i|i|i|i|i|   |
+|   [================ 36-BAND DETERMINISTIC EQUALIZER ===============]   |
+|                                                                         |
+|   [NOW PLAYING]     [QUEUE (3D CAROUSEL)]     [LOG]     [SYNCED LYRICS] |
++-------------------------------------------------------------------------+
+```
 
-## Features
-
-- **Live Now-Playing Display**: Pixel-art turntable featuring a spinning vinyl record, moving tonearm, and smooth local progress ticker.
-- **Album-Art Dynamic Theming**: Real-time palette extraction dynamically shifts ambient accents and highlights to match current album artwork.
-- **Stylized Audio Visualizer**: Chunky, responsive frequency visualizer dancing in sync with track playback.
-- **Full Hardware Playback Controls**: Interactive deck with play/pause, next/previous, shuffle, repeat mode cycling, continuous volume slider, and live device switching.
-- **Interactive Queue View**: 3D carousel and list view of upcoming queued songs with direct click-to-play support.
-- **Locally-Tracked Listening History**: Persistent playback log stored locally in the browser, showing recent tracks with one-click replay.
-- **Synced & Plain Lyrics**: Real-time line-by-line synced lyrics highlighting and plain lyrics fallback powered by the community.
-- **OBS Studio Overlay Mode**: Transparent, low-overhead overlay mode (`?obs=true`) designed specifically for stream setups.
-
----
-
-## Tech Stack
-
-- **Framework**: [React](https://react.dev/) + [Vite](https://vitejs.dev/)
-- **Spotify Integration**: Spotify Web API via client-side **PKCE OAuth Authorization Code Flow** (no backend server or client secret required)
-- **Palette Extraction**: [`node-vibrant`](https://github.com/Vibrant-Colors/node-vibrant) for extracting dynamic color swatches from album art
-- **Lyrics Provider**: [LRCLIB](https://lrclib.net/) (public, community-maintained lyrics API)
-- **Styling**: Handcrafted retro pixel CSS design system with custom scanlines, LCD badges, and CRT effects
+*(Drop your stream screenshots and UI captures right here!)*
 
 ---
 
-## Getting Started
+## ✨ What Makes SpotiDex Different?
 
-Follow these steps to run SpotiDex locally:
+### 💽 Tactile Vinyl Deck & Needle-Drop Physics
+- **Realistic Needle Dynamics**: The tonearm smoothly pivots away when playback pauses and drops into the groove when music begins. Changing tracks triggers a synchronized needle lift-and-drop animation.
+- **Drag-to-Skip Gesture Physics**: Don't just click buttons—click and drag the spinning vinyl record itself. Pull with spring resistance; fling it past the threshold to slide it off-screen and trigger an instant skip, or let go to watch it snap back.
 
-### 1. Create a Spotify Developer App
-1. Go to the [Spotify Developer Dashboard](https://developer.spotify.com/dashboard) and log in with your Spotify account.
+### 🎨 Chromotherapy: Dynamic Album Palette Extraction
+- Powered by `node-vibrant`, SpotiDex samples the dominant colors from your current album art in real-time and injects them into custom CSS properties (`--ink`, `--ink-deep`, `--accent`, `--card`).
+- **WCAG AA Contrast Safeguards**: Unlike naive color pickers that often produce unreadable text, SpotiDex calculates luminance contrast ratios on the fly. If an album produces low contrast, the engine shifts lightness and saturation until it guarantees a minimum **4.5:1 contrast ratio**.
+
+### 📊 36-Band Deterministic Audio Visualizer
+- Spotify's Web API does not stream raw PCM audio bytes to third-party web apps. Instead of faking it with jittery random noise, SpotiDex uses a **Mulberry32 PRNG seeded by the unique Spotify Track ID**.
+- Every song generates its own distinct, reproducible 36-bar harmonic rhythm pattern across 8 discrete LED levels. When paused, the visualizer gracefully settles down to an ambient standby baseline.
+
+### 🎠 3D Perspective Queue Carousel
+- Switch over to the **QUEUE** tab to browse upcoming songs arranged in an interactive 3D cylinder powered by **GSAP**.
+- Scroll with your trackpad/mouse wheel, drag horizontally, or click any queued vinyl card to break into the playlist and jump straight to that track.
+
+### 🎤 Synchronized Karaoke Lyrics
+- Live line-by-line synchronized lyrics powered by the community-maintained [LRCLIB](https://lrclib.net/) database.
+- Uses a local 250ms interpolation clock so lyrics highlight and auto-scroll smoothly between Spotify's 3-second polling cycles. Gracefully falls back to unsynced plain text or instrumental tags when timestamps aren't available.
+
+### 📜 Local "Audio Dex" History Log
+- Spotify's recent history endpoint is notorious for 403 errors and caching issues on developer apps. SpotiDex sidesteps this by maintaining a local, persistent listening log in `localStorage` (capped at 50 tracks).
+- Relive your session history and click any past track to re-cue it instantly (automatically toggling off shuffle so your selection plays immediately).
+
+---
+
+## 🕹️ Keyboard Shortcuts
+
+Take control without ever taking your hands off the keyboard:
+
+| Key | Action |
+|:---|:---|
+| <kbd>Space</kbd> | Toggle Play / Pause |
+| <kbd>→</kbd> (Right Arrow) | Skip to Next Track |
+| <kbd>←</kbd> (Left Arrow) | Skip to Previous Track |
+| <kbd>↑</kbd> (Up Arrow) | Volume +5% |
+| <kbd>↓</kbd> (Down Arrow) | Volume -5% |
+
+*(Shortcuts are automatically disabled when typing in inputs or dialogs).*
+
+---
+
+## 🛠️ Tech Stack & Architecture
+
+- **Core**: [React 19](https://react.dev/) + [Vite](https://vitejs.dev/) (lightning-fast HMR and minimal bundle footprint)
+- **Spotify Auth**: Client-side **OAuth 2.0 PKCE** (Proof Key for Code Exchange). Zero backend servers required. No secrets baked into frontend code.
+- **Animation & 3D Math**: [GSAP](https://greensock.com/gsap/) for smooth 3D stage depth rendering, drag resistance, and carousel transforms.
+- **Palette Extraction**: [`node-vibrant/browser`](https://github.com/Vibrant-Colors/node-vibrant) with custom luminance math and contrast clamping.
+- **Lyrics Engine**: [LRCLIB](https://lrclib.net/) REST API with timestamp parser and fuzzy search fallback.
+- **State & Performance**:
+  - 3-second smart Spotify API poll interval with automatic token refresh on 401.
+  - 250ms sub-ticker for buttery-smooth progress bar movement and lyrics sync.
+  - Page Visibility API integration to pause network and animation timers when the browser tab is hidden.
+
+---
+
+## 🚀 Getting Started
+
+You will need a standard (free or premium) Spotify account and 3 minutes to set up a developer credential.
+
+### 1. Register a Spotify Developer App
+1. Go to the [Spotify Developer Dashboard](https://developer.spotify.com/dashboard) and log in.
 2. Click **Create app**.
-3. Fill in the App name (e.g. `SpotiDex`) and description.
-4. Set **Redirect URI** to:
-   ```
-   http://127.0.0.1:5173/callback
-   ```
-   *(Ensure you use `127.0.0.1` and NOT `localhost`, as Spotify's OAuth flow strictly matches URIs).*
-5. Check **Web API** under "Which API/SDKs are you planning to use?" and save.
-6. Under app settings, copy your **Client ID**.
+3. Fill out the basic details:
+   - **App name**: `SpotiDex`
+   - **App description**: `My retro pixel vinyl companion`
+   - **Redirect URI**: `http://127.0.0.1:5173/callback`
+   > ⚠️ **CRITICAL**: Spotify's redirect URI validator is exact. You **MUST** use `http://127.0.0.1:5173/callback` (NOT `localhost`).
+4. Select **Web API** under the APIs section and accept the Developer Terms.
+5. In your new app's **Settings**, copy the **Client ID**.
 
-### 2. Configure Environment Variables
-Create a `.env` file in the root directory (you can copy `.env.example`):
-
+### 2. Clone & Configure
 ```bash
+# Clone the repository
+git clone https://github.com/yashkokane1031/SpotiDex.git
+cd SpotiDex
+
+# Copy the environment template
 cp .env.example .env
 ```
 
-Set your Client ID and redirect URI:
+Open `.env` in your text editor and paste your Spotify Client ID:
 ```env
 VITE_SPOTIFY_CLIENT_ID=your_spotify_client_id_here
 VITE_REDIRECT_URI=http://127.0.0.1:5173/callback
 ```
 
-### 3. Install & Run
+### 3. Install & Launch
 ```bash
 # Install dependencies
 npm install
 
-# Start Vite dev server
+# Start the local development server
 npm run dev
 ```
 
-Open `http://127.0.0.1:5173` in your browser and click **CONNECT SPOTIFY** to begin!
+Open **`http://127.0.0.1:5173`** in your browser, click **CONNECT SPOTIFY**, and spin your first record!
 
 ---
 
-## OBS Studio Overlay Setup
+## 📺 OBS Studio Overlay Mode
 
-SpotiDex includes a native overlay mode designed specifically for OBS Studio (and Streamlabs) browser sources, allowing you to embed a transparent vinyl widget directly into your stream.
+SpotiDex comes with a first-class stream overlay mode that strips away page margins, headers, and backgrounds—giving you a 100% transparent pixel-art deck that floats cleanly over gameplay or webcam scenes.
 
-### ⚠️ Important: First-Time Authentication
-> **OAuth redirects do NOT work reliably inside OBS Studio's internal browser source.**
+### ⚠️ Prerequisite: Authenticate Once in Your Browser
+> **OBS Studio's built-in CEF browser does not support OAuth popups or complex auth redirect loops.**
 > 
-> You **must** authenticate once in your primary web browser (Chrome, Edge, Firefox, Brave, etc.) before adding the overlay to OBS:
-> 1. Open `http://127.0.0.1:5173` in your normal web browser.
-> 2. Click **CONNECT SPOTIFY** and authorize access.
-> 3. Start playing any song on Spotify to verify your connection.
-> 4. Once connected, your credentials are saved in your browser storage. You can now add the OBS Browser Source.
+> Simply open `http://127.0.0.1:5173` in your normal web browser (Chrome, Edge, Firefox, Brave) and connect Spotify once. SpotiDex stores your token in browser storage on your machine.
 
-### Adding to OBS Studio
-1. In OBS Studio, go to your **Sources** dock, click **`+`**, and choose **Browser**.
-2. Name the source (e.g., `SpotiDex Overlay`).
+### Adding SpotiDex to OBS
+1. In OBS Studio, locate the **Sources** dock, click **`+`**, and choose **Browser**.
+2. Name the source (e.g. `SpotiDex Deck`).
 3. Set the **URL** to:
    ```
    http://127.0.0.1:5173/?obs=true
@@ -96,31 +188,57 @@ SpotiDex includes a native overlay mode designed specifically for OBS Studio (an
 4. Set dimensions:
    - **Width**: `760` (or `800`)
    - **Height**: `400`
-5. Keep OBS default Custom CSS (`body { background-color: rgba(0, 0, 0, 0); margin: 0px auto; overflow: hidden; }`).
-6. Click **OK**.
+5. Ensure OBS's default Custom CSS remains:
+   ```css
+   body { background-color: rgba(0, 0, 0, 0); margin: 0px auto; overflow: hidden; }
+   ```
+6. Click **OK**!
 
-### Overlay URL Options
-- **Minimal Transparent Overlay (Passive)**:
+### Overlay URL Tweaks
+- **Clean Passive Display (Vinyl + Visualizer)**:
   ```
   http://127.0.0.1:5173/?obs=true
   ```
-  Renders the spinning vinyl record, tonearm, track information, progress bar, and audio visualizer with a 100% transparent background.
-- **Overlay with Control Strip**:
+- **Streamer Deck with Transport Controls**:
   ```
   http://127.0.0.1:5173/?obs=true&controls=true
   ```
-  Renders the player along with interactive playback controls and tab toggles.
 
 ---
 
-## Known Limitations
+## 💡 Real Talk: Known Limitations
 
-- **No "Save to Library" (Heart) Button**: Spotify now requires enterprise-level *Extended Quota* approval for the library write scope (`user-library-modify`). Because personal developer apps are restricted at the platform level, this feature cannot be supported.
-- **Locally-Tracked Listening History**: Rather than relying on Spotify's inconsistent recently-played endpoint, SpotiDex builds an audio log locally in your browser storage. As a result, history only reflects tracks played while SpotiDex is open.
-- **Lyrics Availability**: Lyrics are fetched from the free, community-maintained [LRCLIB](https://lrclib.net/) database. While coverage is extensive for mainstream releases, indie tracks, rare singles, or instrumentals may not have synchronized lyrics available.
+We believe in being 100% upfront about platform boundaries rather than hiding bugs behind vague excuses:
+
+1. **No "Save to Liked Songs" (Heart) Button**:
+   - Spotify restructured their Developer Platform policies: any endpoint that modifies a user's library (`user-library-modify`) now requires enterprise-level *Extended Quota* approval with commercial agreements. Since personal open-source apps cannot qualify, this feature was completely removed rather than left as a broken, failing button.
+2. **Local-Only Listening History**:
+   - Spotify's official `/me/player/recently-played` endpoint frequently returns 403 Forbidden on developer apps and is slow to refresh. To guarantee reliability, SpotiDex maintains its history locally in your browser's `localStorage`. This means history is logged while SpotiDex is running.
+3. **Lyrics Completeness**:
+   - Lyrics are fetched from the crowd-powered [LRCLIB](https://lrclib.net/) database. While coverage for popular releases is fantastic, obscure underground b-sides, indie demos, or instrumental interludes may not have synced lines available.
+4. **Spotify Premium Required for Full Playback Control**:
+   - Due to Spotify's Web API architecture, playback commands (play, pause, skip, seek, transfer device) require an active **Spotify Premium** account. Free tier accounts can only read currently playing metadata.
 
 ---
 
-## License
+## 🤝 Contributing
 
-MIT License. Feel free to fork and customize!
+Got an idea for a retro skin, an oscilloscope mode, or a new vinyl texture? Pull requests and issues are welcome!
+
+```bash
+# Run the ultra-fast linter
+npm run lint
+
+# Check production build
+npm run build
+```
+
+---
+
+## 📄 License
+
+Distributed under the **MIT License**. See `LICENSE` for more information.
+
+<div align="center">
+Built with ❤️, pixel art, and lots of coffee by <a href="https://github.com/yashkokane1031">Yash Kokane</a>.
+</div>
