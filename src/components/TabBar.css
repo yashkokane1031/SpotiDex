@@ -1,0 +1,59 @@
+/* === TabBar — Gapped Retro Folder Tabs === */
+
+.tab-bar {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 8px;
+  max-width: 720px;
+  width: 100%;
+  margin-bottom: 0.75rem;
+  position: relative;
+  z-index: 5;
+}
+
+.tab-btn {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 10px;
+  line-height: 1;
+  padding: 10px 18px;
+  background: var(--card);
+  color: var(--ink);
+  border: 3px solid var(--ink);
+  border-radius: 0;
+  cursor: pointer;
+  letter-spacing: 0.05em;
+  position: relative;
+  transition: background 0.15s, color 0.15s;
+  box-shadow: none;
+}
+
+/* Each tab is its own distinct box — no shared edges */
+
+/* Inactive hover */
+.tab-btn:hover:not(.is-active) {
+  background: color-mix(in srgb, var(--accent) 15%, var(--card));
+}
+
+/* Active tab */
+.tab-btn.is-active {
+  background: var(--accent);
+  color: var(--card);
+  border-color: var(--ink);
+  z-index: 6;
+}
+
+@media (max-width: 600px) {
+  .tab-btn {
+    font-size: 8px;
+    padding: 8px 10px;
+    letter-spacing: 0.02em;
+  }
+}
+
+@media (max-width: 440px) {
+  .tab-btn {
+    font-size: 7px;
+    padding: 6px 7px;
+  }
+}

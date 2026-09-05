@@ -1,0 +1,208 @@
+/* === VinylRecord === */
+
+.vinyl-record {
+  position: relative;
+  width: 240px;
+  height: 240px;
+  flex-shrink: 0;
+  touch-action: none;     /* prevent scroll during drag */
+  user-select: none;
+}
+
+/* --- Drag direction hints --- */
+.vinyl-record__hint {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 20px;
+  color: var(--ink);
+  opacity: 0.6;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.vinyl-record__hint--left {
+  right: -28px;
+}
+
+.vinyl-record__hint--right {
+  left: -28px;
+}
+
+/* --- The spinning disc --- */
+.vinyl-record__disc {
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background: var(--ink-deep);
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  animation: spin 2.5s linear infinite;
+  animation-play-state: paused;
+  overflow: hidden;
+}
+
+.vinyl-record__disc--spinning {
+  animation-play-state: running;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* --- Groove rings --- */
+.vinyl-record__grooves {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background:
+    repeating-radial-gradient(
+      circle at center,
+      transparent 0px,
+      transparent 4px,
+      rgba(255, 255, 255, 0.06) 4px,
+      rgba(255, 255, 255, 0.06) 5px
+    );
+  pointer-events: none;
+}
+
+/* --- Center label --- */
+.vinyl-record__label {
+  position: absolute;
+  width: 90px;
+  height: 90px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid var(--ink);
+  background: var(--card);
+  z-index: 1;
+}
+
+.vinyl-record__label-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Checkerboard placeholder when no album art */
+.vinyl-record__label--checkerboard {
+  background:
+    repeating-conic-gradient(var(--ink) 0% 25%, var(--card) 0% 50%)
+    0 0 / 10px 10px;
+}
+
+/* Small center dot */
+.vinyl-record__label::after {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: var(--ink);
+  z-index: 2;
+}
+
+/* --- Tonearm --- */
+.vinyl-record__tonearm {
+  position: absolute;
+  top: 2px;
+  right: 18px;
+  width: 4px;
+  height: 80px;
+  background: var(--ink);
+  transform-origin: top center;
+  transform: rotate(25deg);
+  transition: transform 0.4s ease;
+  z-index: 3;
+}
+
+.vinyl-record__tonearm--playing {
+  transform: rotate(32deg);
+}
+
+/* Needle drop transition on track change:
+   - 0% to 25%: lifts up smoothly away from record
+   - 25% to 55%: holds/pauses ~250-300ms in lifted position
+   - 55% to 100%: drops to playing position with scoped overshoot bounce curve
+*/
+@keyframes needleDrop {
+  0% {
+    transform: rotate(25deg);
+    animation-timing-function: ease-out;
+  }
+  25% {
+    transform: rotate(16deg);
+    animation-timing-function: linear;
+  }
+  55% {
+    transform: rotate(16deg);
+    animation-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  100% {
+    transform: rotate(32deg);
+  }
+}
+
+.vinyl-record__tonearm--changing {
+  animation: needleDrop 0.7s forwards;
+}
+
+/* Pivot circle */
+.vinyl-record__tonearm::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 3px solid var(--ink);
+  background: var(--card);
+}
+
+/* Stylus tip */
+.vinyl-record__tonearm::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 6px;
+  height: 6px;
+  background: var(--accent);
+  border-radius: 50%;
+}
+
+/* --- Responsive --- */
+@media (max-width: 600px) {
+  .vinyl-record {
+    width: 180px;
+    height: 180px;
+  }
+
+  .vinyl-record__disc {
+    width: 165px;
+    height: 165px;
+    top: 7px;
+    left: 7px;
+  }
+
+  .vinyl-record__label {
+    width: 68px;
+    height: 68px;
+  }
+
+  .vinyl-record__tonearm {
+    height: 60px;
+    right: 12px;
+  }
+}

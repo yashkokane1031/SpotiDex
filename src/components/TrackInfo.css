@@ -1,0 +1,149 @@
+/* === TrackInfo === */
+
+.track-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+/* --- Status row (badge + equalizer) --- */
+.track-info__status-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.track-info__badge {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 8px;
+  background: var(--accent);
+  color: var(--card);
+  padding: 4px 10px;
+  border: 2px solid var(--ink);
+  border-radius: 0;
+  white-space: nowrap;
+  line-height: 1;
+}
+
+/* --- Equalizer bars --- */
+.track-info__eq {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 20px;
+}
+
+.track-info__eq-bar {
+  width: 3px;
+  background: var(--accent);
+  display: block;
+  animation: eq-bar ease-in-out infinite;
+  animation-play-state: paused;
+}
+
+.track-info__eq-bar--playing {
+  animation-play-state: running;
+}
+
+.track-info__eq-bar:nth-child(1) { height: 4px; animation-duration: 0.4s; }
+.track-info__eq-bar:nth-child(2) { height: 4px; animation-duration: 0.5s; }
+.track-info__eq-bar:nth-child(3) { height: 4px; animation-duration: 0.3s; }
+.track-info__eq-bar:nth-child(4) { height: 4px; animation-duration: 0.6s; }
+
+@keyframes eq-bar {
+  0%, 100% { height: 4px; }
+  50% { height: 18px; }
+}
+
+/* --- Track metadata --- */
+.track-info__name {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 13px;
+  color: var(--ink);
+  line-height: 1.6;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.track-info__artist {
+  font-family: 'VT323', monospace;
+  font-size: 22px;
+  color: var(--ink);
+  opacity: 0.7;
+}
+
+.track-info__album {
+  font-family: 'VT323', monospace;
+  font-size: 18px;
+  color: var(--ink);
+  opacity: 0.5;
+}
+
+/* --- Progress bar --- */
+.track-info__progress {
+  margin-top: 0.4rem;
+}
+
+.track-info__progress-track {
+  height: 12px;
+  background: color-mix(in srgb, var(--ink) 15%, var(--card));
+  border: 2px solid var(--ink);
+  border-radius: 0;
+  overflow: hidden;
+}
+
+.track-info__progress-fill {
+  height: 100%;
+  background: var(--ink);
+  border-radius: 0;
+  transition: width 0.25s linear;
+}
+
+.track-info__progress-labels {
+  display: flex;
+  justify-content: space-between;
+  font-family: 'VT323', monospace;
+  font-size: 18px;
+  color: var(--ink);
+  opacity: 0.6;
+  margin-top: 2px;
+}
+
+/* --- Empty state --- */
+.track-info__empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  flex: 1;
+  padding: 1rem 0;
+}
+
+.track-info__empty-text {
+  font-family: 'VT323', monospace;
+  font-size: 24px;
+  color: var(--ink);
+  opacity: 0.5;
+  text-align: center;
+}
+
+@media (max-width: 600px) {
+  .track-info {
+    align-items: center;
+    text-align: center;
+  }
+
+  .track-info__name {
+    font-size: 11px;
+  }
+
+  .track-info__status-row {
+    justify-content: center;
+  }
+}

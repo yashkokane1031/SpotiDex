@@ -1,0 +1,161 @@
+/* === PageFrame === */
+
+.page-frame {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  padding: 3rem 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* --- Corner Brackets --- */
+.page-frame__corner {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.page-frame__corner--tl { top: 16px; left: 16px; }
+.page-frame__corner--tr { top: 16px; right: 16px; transform: scaleX(-1); }
+.page-frame__corner--bl { bottom: 16px; left: 16px; transform: scaleY(-1); }
+.page-frame__corner--br { bottom: 16px; right: 16px; transform: scale(-1); }
+
+/* --- Decorative Scatter --- */
+.page-frame__decorations {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Checkered squares */
+.page-frame__checker {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background:
+    repeating-conic-gradient(var(--chrome-ink) 0% 25%, transparent 0% 50%)
+    0 0 / 6px 6px;
+  opacity: 0.35;
+}
+
+.page-frame__checker--1 { top: 12%; left: 8%; }
+.page-frame__checker--2 { top: 35%; right: 6%; }
+.page-frame__checker--3 { bottom: 20%; left: 12%; }
+.page-frame__checker--4 { bottom: 10%; right: 10%; }
+
+/* Dotted connector lines */
+.page-frame__line {
+  position: absolute;
+  border: none;
+  border-top: 1px dashed var(--chrome-dim);
+  opacity: 0.7;
+}
+
+.page-frame__line--1 {
+  width: 80px;
+  top: 18%;
+  right: 10%;
+  transform: rotate(-30deg);
+}
+
+.page-frame__line--2 {
+  width: 60px;
+  bottom: 28%;
+  left: 6%;
+  transform: rotate(45deg);
+}
+
+.page-frame__line--3 {
+  width: 100px;
+  bottom: 15%;
+  right: 15%;
+  transform: rotate(-15deg);
+}
+
+/* --- Title Block --- */
+.page-frame__title-block {
+  text-align: center;
+  margin-bottom: 2.5rem;
+  z-index: 1;
+}
+
+.page-frame__title {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 18px;
+  color: var(--chrome-ink);
+  position: relative;
+  display: inline-block;
+  line-height: 1.4;
+}
+
+.page-frame__title::before,
+.page-frame__title::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.page-frame__title::before {
+  color: #00e5ff;
+  transform: translate(-2px, 1px);
+}
+
+.page-frame__title::after {
+  color: #ff2d95;
+  transform: translate(2px, -1px);
+}
+
+.page-frame__subtitle {
+  font-family: 'VT323', monospace;
+  font-size: 20px;
+  letter-spacing: 0.3em;
+  color: var(--chrome-ink);
+  opacity: 0.7;
+  margin-top: 0.5rem;
+}
+
+/* --- Content Slot --- */
+.page-frame__content {
+  z-index: 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@media (max-width: 600px) {
+  .page-frame__title {
+    font-size: 13px;
+  }
+
+  .page-frame {
+    padding: 2rem 1rem;
+  }
+}
+
+/* --- OBS Overlay Frame --- */
+.page-frame--obs {
+  min-height: auto !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  background: transparent !important;
+  overflow: visible !important;
+  justify-content: flex-start !important;
+  align-items: flex-start !important;
+}
+
+.page-frame__content--obs {
+  padding: 0 !important;
+  margin: 0 !important;
+  width: auto !important;
+  max-width: 100% !important;
+  align-items: flex-start !important;
+}

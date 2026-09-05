@@ -1,0 +1,87 @@
+/* === Google Fonts === */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap');
+
+/* === Design Tokens === */
+:root {
+  --ink: #2d1b4e;
+  --ink-deep: #1a1220;
+  --accent: #e85fa8;
+  --card: #f5f0e6;
+
+  /* Fixed page chrome tokens (not overridden by per-track theme extraction) */
+  --chrome-ink: #f4c9e8;
+  --chrome-dim: rgba(244, 201, 232, 0.35);
+}
+
+/* === Reset === */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* === Global === */
+body {
+  font-family: 'VT323', monospace;
+  min-height: 100vh;
+  color: var(--ink);
+  background-color: #0a0710;
+  background-image: radial-gradient(
+    ellipse at center,
+    rgba(22, 15, 36, 0.7) 0%,
+    rgba(6, 4, 10, 0.98) 100%
+  );
+  background-attachment: fixed;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Subtle CRT scanline overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.03) 0px,
+    rgba(255, 255, 255, 0.03) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  transition: none !important;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+/* === OBS Overlay Mode === */
+body.obs-mode,
+#root.obs-mode {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  min-height: auto !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  overflow: visible;
+}
+
+body.obs-mode::before {
+  display: none !important;
+}
+
+/* === Theme Crossfade === */
+/* Smooth palette shifts when album art changes */
+*,
+*::before,
+*::after {
+  transition:
+    background-color 0.6s ease,
+    border-color 0.6s ease,
+    color 0.6s ease,
+    box-shadow 0.6s ease;
+}

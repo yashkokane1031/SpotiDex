@@ -1,0 +1,208 @@
+/* === LyricsPanel — Pixel-styled lyrics display === */
+
+.lyrics-panel {
+  background: var(--card);
+  border: 5px solid var(--ink);
+  border-radius: 0;
+  box-shadow: 6px 6px 0 var(--ink);
+  max-width: 720px;
+  width: 100%;
+  margin-top: 0;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+/* --- Header --- */
+.lyrics-panel__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1.25rem;
+  border-bottom: 3px solid var(--ink);
+  background: var(--card);
+}
+
+.lyrics-panel__title-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.lyrics-panel__led {
+  width: 8px;
+  height: 8px;
+  background: var(--accent);
+  border: 1px solid var(--ink);
+  display: inline-block;
+  animation: lyricsLedPulse 2s infinite ease-in-out;
+}
+
+@keyframes lyricsLedPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.85); }
+}
+
+.lyrics-panel__title {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 11px;
+  color: var(--ink);
+  letter-spacing: 0.05em;
+  margin: 0;
+}
+
+.lyrics-panel__tag {
+  font-family: 'VT323', monospace;
+  font-size: 16px;
+  color: var(--ink);
+  opacity: 0.6;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* --- Body --- */
+.lyrics-panel__body {
+  position: relative;
+  min-height: 280px;
+  max-height: 460px;
+  width: 100%;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}
+
+/* Retro scrollbar */
+.lyrics-panel__body::-webkit-scrollbar {
+  width: 8px;
+}
+
+.lyrics-panel__body::-webkit-scrollbar-track {
+  background: color-mix(in srgb, var(--ink) 10%, var(--card));
+  border: 1px solid var(--ink);
+}
+
+.lyrics-panel__body::-webkit-scrollbar-thumb {
+  background: var(--ink);
+  border-radius: 0;
+}
+
+.lyrics-panel__body::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}
+
+/* --- Status / Empty / Instrumental --- */
+.lyrics-panel__status {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1.5rem;
+  width: 100%;
+  text-align: center;
+  gap: 0.75rem;
+  min-height: 280px;
+}
+
+.lyrics-panel__status-icon {
+  font-size: 36px;
+  opacity: 0.5;
+}
+
+.lyrics-panel__status-title {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 10px;
+  color: var(--ink);
+  letter-spacing: 0.05em;
+}
+
+.lyrics-panel__status-hint {
+  font-family: 'VT323', monospace;
+  font-size: 18px;
+  color: var(--ink);
+  opacity: 0.6;
+}
+
+/* --- Synced Lyrics List --- */
+.lyrics-panel__synced-list {
+  list-style: none;
+  margin: 0;
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.lyrics-panel__line {
+  font-family: 'VT323', monospace;
+  font-size: 20px;
+  line-height: 1.5;
+  color: var(--ink);
+  opacity: 0.35;
+  padding: 4px 8px;
+  transition: opacity 0.25s, color 0.25s, transform 0.25s;
+  border-left: 3px solid transparent;
+  cursor: default;
+}
+
+.lyrics-panel__line--active {
+  opacity: 1;
+  color: var(--accent);
+  font-weight: bold;
+  font-size: 22px;
+  border-left-color: var(--accent);
+  transform: translateX(4px);
+}
+
+/* Lines that are blank (instrumental breaks) */
+.lyrics-panel__line--blank {
+  min-height: 1.2em;
+}
+
+/* --- Plain Lyrics Block --- */
+.lyrics-panel__plain {
+  padding: 1.5rem;
+  font-family: 'VT323', monospace;
+  font-size: 20px;
+  line-height: 1.7;
+  color: var(--ink);
+  opacity: 0.8;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* --- Footer --- */
+.lyrics-panel__footer {
+  padding: 0.5rem 1.25rem;
+  border-top: 2px solid var(--ink);
+  background: var(--card);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.lyrics-panel__source {
+  font-family: 'VT323', monospace;
+  font-size: 15px;
+  color: var(--ink);
+  opacity: 0.5;
+  letter-spacing: 0.05em;
+}
+
+/* --- Responsive --- */
+@media (max-width: 600px) {
+  .lyrics-panel__body {
+    max-height: 360px;
+  }
+
+  .lyrics-panel__line {
+    font-size: 18px;
+  }
+
+  .lyrics-panel__line--active {
+    font-size: 20px;
+  }
+
+  .lyrics-panel__plain {
+    font-size: 18px;
+  }
+}
