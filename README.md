@@ -241,7 +241,7 @@ npm run build
 
 ## 📄 License
 
-Distributed under the **MIT License**. See `LICENSE` for more information.
+Distributed under the **MIT License**. See [LICENSE](LICENSE) for more information.
 
 <div align="center">
 Built with ❤️, pixel art, and lots of coffee by <a href="https://github.com/yashkokane1031">Yash Kokane</a>.
