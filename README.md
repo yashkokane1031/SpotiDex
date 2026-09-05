@@ -43,27 +43,31 @@ No servers, no hidden backends, and no proprietary lock-in. Just pure client-sid
 
 ## 📸 Screenshots & Vibe Check
 
-<!-- add screenshots here -->
+<div align="center">
 
-```
-+-------------------------------------------------------------------------+
-| [● REC]  SPOTIDEX HI-FI STEREO COMPONENT                   [DEVICE: PC] |
-|-------------------------------------------------------------------------|
-|                                                                         |
-|      /-------------\      ♪ THE LESS I KNOW THE BETTER                  |
-|     |   (((@)))     |       Tame Impala — Currents                      |
-|     |  ( ( @ ) )    |                                                   |
-|      \-------------/      [ 01:24 ] ========o------------- [ 03:36 ]    |
-|        \__ \_______       [⏮]  [▶]  [⏭]  [🔀]  [🔁]  VOL: [====--]     |
-|                                                                         |
-|   |i|i|i|i|i|i|i|i|i|i|i|i|i|i|i|i|i|i|i|i|i|i|i|i|i|i|i|i|i|i|i|i|i|   |
-|   [================ 36-BAND DETERMINISTIC EQUALIZER ===============]   |
-|                                                                         |
-|   [NOW PLAYING]     [QUEUE (3D CAROUSEL)]     [LOG]     [SYNCED LYRICS] |
-+-------------------------------------------------------------------------+
-```
+### 💽 Now Playing — Turntable, Tonearm & Deterministic Visualizer
+*Real-time spinning vinyl with album center label, animated needle drop, dynamic album chromotherapy, and 36-band equalizer.*
 
-*(Drop your stream screenshots and UI captures right here!)*
+<img src="./Misc/NowPlaying.png" alt="SpotiDex Now Playing View" width="100%" />
+
+<br/><br/>
+
+### 🎠 3D Depth Queue Carousel & 🎤 Synced Karaoke Lyrics
+
+| 🎠 3D Depth Queue Carousel | 🎤 Synced Karaoke Lyrics |
+|:---:|:---:|
+| <img src="./Misc/PlayingNext.png" alt="Queue Carousel" width="100%" /> | <img src="./Misc/Lyrics.png" alt="Synced Lyrics" width="100%" /> |
+| *Browse upcoming queue in an interactive 3D cylinder with click-to-play* | *Real-time line-by-line synced lyrics highlighting powered by LRCLIB* |
+
+<br/>
+
+### 📜 Persistent Session Audio Log
+
+<img src="./Misc/RecentlyPlayed.png" alt="Recently Played History" width="100%" />
+
+*Session playback log saved to local storage with 1-click replay.*
+
+</div>
 
 ---
 
