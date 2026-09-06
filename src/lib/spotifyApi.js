@@ -274,3 +274,135 @@ export function transferPlayback(token, deviceId) {
   });
 }
 
+// ---------------------------------------------------------------------------
+// Playback Context
+// ---------------------------------------------------------------------------
+
+/**
+ * Start playback with a context URI (e.g. playlist or album).
+ *
+ * @param {string} token
+ * @param {string} contextUri
+ * @param {string|null} offsetUri
+ */
+export function playContext(token, contextUri, offsetUri = null) {
+  const body = {
+    context_uri: contextUri,
+    ...(offsetUri ? { offset: { uri: offsetUri } } : {}),
+  };
+  return controlRequest(`${BASE_URL}/me/player/play`, token, 'PUT', body);
+}
+
+// ---------------------------------------------------------------------------
+// Library & Playlists
+// ---------------------------------------------------------------------------
+
+/**
+ * Fetch the current user's Spotify ID.
+ *
+ * @param {string} accessToken
+ * @returns {Promise<string>}
+ */
+export async function getCurrentUserId(accessToken) {
+  const response = await fetch(`${BASE_URL}/me`, {
+    headers: { Authorization: `Bearer ${accessToken}` },
+  });
+
+  if (response.status === 401) {
+    const error = new Error('Access token expired');
+    error.status = 401;
+    throw error;
+  }
+
+  if (!response.ok) {
+    const error = new Error(`Spotify API error: ${response.status}`);
+    error.status = response.status;
+    throw error;
+  }
+
+  const data = await response.json();
+  return data.id;
+}
+
+/**
+ * Fetch the current user's playlists (up to 50).
+ *
+ * @param {string} accessToken
+ * @returns {Promise<Array<object>>}
+ */
+export async function getUserPlaylists(accessToken) {
+  const response = await fetch(`${BASE_URL}/me/playlists?limit=50`, {
+    headers: { Authorization: `Bearer ${accessToken}` },
+  });
+
+  if (response.status === 204) {
+    return [];
+  }
+
+  if (response.status === 401) {
+    const error = new Error('Access token expired');
+    error.status = 401;
+    throw error;
+  }
+
+  if (!response.ok) {
+    const error = new Error(`Spotify API error: ${response.status}`);
+    error.status = response.status;
+    throw error;
+  }
+
+  const data = await response.json();
+  return data.items || [];
+}
+
+/**
+ * Fetch tracks from a playlist (up to 50).
+ *
+ * @param {string} accessToken
+ * @param {string} playlistId
+ * @returns {Promise<Array<{ id: string, uri: string, name: string, artist: string, album: string, image: string, durationMs: number }>>}
+ */
+export async function getPlaylistTracks(accessToken, playlistId) {
+  const response = await fetch(`${BASE_URL}/playlists/${encodeURIComponent(playlistId)}/tracks?limit=50`, {
+    headers: { Authorization: `Bearer ${accessToken}` },
+  });
+
+  if (response.status === 204) {
+    return [];
+  }
+
+  if (response.status === 401) {
+    const error = new Error('Access token expired');
+    error.status = 401;
+    throw error;
+  }
+
+  if (!response.ok) {
+    const error = new Error(`Spotify API error: ${response.status}`);
+    error.status = response.status;
+    throw error;
+  }
+
+  const data = await response.json();
+  const rawItems = data.items || [];
+
+  return rawItems
+    .filter((item) => item && item.track && item.track.id)
+    .map((item) => {
+      const t = item.track;
+      const images = t.album?.images || [];
+      const image = images[images.length - 1]?.url || images[0]?.url || '';
+      const artist = (t.artists || []).map((a) => a.name).join(', ') || 'Unknown Artist';
+
+      return {
+        id: t.id,
+        uri: t.uri || `spotify:track:${t.id}`,
+        name: t.name || 'Unknown Track',
+        artist,
+        album: t.album?.name || '',
+        image,
+        durationMs: t.duration_ms || 0,
+      };
+    });
+}
+

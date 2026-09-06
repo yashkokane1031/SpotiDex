@@ -1,5 +1,17 @@
 /* === App-level styles === */
 
+/* --- App Layout (Two-Column with SideNav) --- */
+.app-layout {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+}
+
+.app-layout--obs {
+  display: block;
+}
+
 /* --- Login panel --- */
 .login-panel {
   flex: 1;

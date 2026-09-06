@@ -11,7 +11,7 @@ import { useObsMode } from './hooks/useObsMode';
 import { useDocumentTitle } from './hooks/useDocumentTitle';
 import { ThemeProvider } from './context/ThemeContext';
 import PageFrame from './components/PageFrame';
-import TabBar from './components/TabBar';
+import SideNav from './components/SideNav';
 import VinylCard from './components/VinylCard';
 import VinylRecord from './components/VinylRecord';
 import TrackInfo from './components/TrackInfo';
@@ -20,6 +20,7 @@ import AudioVisualizer from './components/AudioVisualizer';
 import QueueCarousel from './components/QueueCarousel';
 import RecentlyPlayedRail from './components/RecentlyPlayedRail';
 import LyricsPanel from './components/LyricsPanel';
+import LibraryPanel from './components/LibraryPanel';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { useNetworkStatus } from './hooks/useNetworkStatus';
 import OfflineFallback from './components/OfflineFallback';
@@ -35,11 +36,11 @@ function App() {
     <>
       <ReloadPrompt />
       {!isOnline ? (
-        <PageFrame isObsMode={isObsMode}>
+        <PageFrame isObsMode={isObsMode} showTitle={true}>
           <OfflineFallback onRetry={() => window.location.reload()} />
         </PageFrame>
       ) : authLoading ? (
-        <PageFrame isObsMode={isObsMode}>
+        <PageFrame isObsMode={isObsMode} showTitle={true}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flex: 1 }}>
             <p style={{ fontFamily: "'VT323', monospace", fontSize: '24px', color: 'var(--ink)', opacity: 0.6 }}>
               Loading…
@@ -47,7 +48,7 @@ function App() {
           </div>
         </PageFrame>
       ) : !isAuthenticated ? (
-        <PageFrame isObsMode={isObsMode}>
+        <PageFrame isObsMode={isObsMode} showTitle={true}>
           <VinylCard>
             <VinylRecord albumImages={null} isSpinning={false} draggable={false} />
             <LoginPanel onLogin={login} />
@@ -211,121 +212,132 @@ function NowPlayingView({ onLogout, isObsMode = false, showControls = true }) {
 
   return (
     <ThemeProvider albumArtUrl={albumArtUrl}>
-      <PageFrame isObsMode={isObsMode}>
-        {/* Tab Bar (hidden in OBS mode) */}
+      <div className={`app-layout${isObsMode ? ' app-layout--obs' : ''}`}>
+        {/* SideNav (hidden in OBS mode) */}
         {!isObsMode && (
-          <TabBar activeTab={activeTab} onSelectTab={handleSelectTab} />
-        )}
-
-        {/* OBS Mode: Force Now Playing only (ignoring whichever tab was active) */}
-        {isObsMode ? (
-          <>
-            <VinylCard>
-              <VinylRecord
-                albumImages={track?.album?.images ?? null}
-                isSpinning={isPlaying}
-                onSkipNext={controls.skipToNext}
-                onSkipPrevious={controls.skipToPrevious}
-                isBusy={controls.isBusy}
-                draggable={showControls}
-                trackId={track?.id ?? null}
-              />
-              <TrackInfo
-                track={track}
-                isPlaying={isPlaying}
-                smoothProgressMs={smoothProgressMs}
-                isSkippingToQueueItem={controls.isSkippingToQueueItem}
-                skippingTargetName={controls.skippingTargetName}
-              />
-            </VinylCard>
-
-            <AudioVisualizer trackId={track?.id ?? 'idle'} isPlaying={isPlaying} />
-          </>
-        ) : (
-          <>
-            {/* Tab 1: Now Playing (VinylCard + AudioVisualizer) */}
-            {activeTab === 'now-playing' && (
-              <>
-                <VinylCard>
-                  <VinylRecord
-                    albumImages={track?.album?.images ?? null}
-                    isSpinning={isPlaying}
-                    onSkipNext={controls.skipToNext}
-                    onSkipPrevious={controls.skipToPrevious}
-                    isBusy={controls.isBusy}
-                    draggable={true}
-                    trackId={track?.id ?? null}
-                  />
-                  <TrackInfo
-                    track={track}
-                    isPlaying={isPlaying}
-                    smoothProgressMs={smoothProgressMs}
-                    isSkippingToQueueItem={controls.isSkippingToQueueItem}
-                    skippingTargetName={controls.skippingTargetName}
-                  />
-                </VinylCard>
-
-                <AudioVisualizer trackId={track?.id ?? 'idle'} isPlaying={isPlaying} />
-              </>
-            )}
-
-            {/* Tab 2: Playing Next (QueueCarousel) */}
-            {activeTab === 'playing-next' && (
-              <QueueCarousel
-                queue={queue}
-                isLoading={queueLoading}
-                error={queueError}
-                refetchQueue={refetchQueue}
-                onPlayQueueItem={controls.playQueueItem}
-                onSwitchToNowPlaying={() => handleSelectTab('now-playing')}
-              />
-            )}
-
-            {/* Tab 3: Recently Played (RecentlyPlayedRail) */}
-            {activeTab === 'recently-played' && (
-              <RecentlyPlayedRail
-                tracks={history.slice(0, 10)}
-                isLoading={false}
-                error={null}
-                onPlayTrack={controls.playTrackUri}
-              />
-            )}
-
-            {/* Tab 4: Lyrics (LyricsPanel) */}
-            {activeTab === 'lyrics' && (
-              <LyricsPanel
-                lyricsState={lyricsState}
-                syncedLines={syncedLines}
-                plainText={plainText}
-                smoothProgressMs={smoothProgressMs}
-              />
-            )}
-          </>
-        )}
-
-        {/* Playback Controls (hidden in OBS mode unless ?controls=true) */}
-        {(!isObsMode || showControls) && (
-          <ControlModule
-            controls={controls}
-            isPlaying={isPlaying}
-            hasContext={hasContext}
-            devices={devices}
-            activeDeviceId={activeDeviceId}
-            onSwitchDevice={switchDevice}
+          <SideNav
+            activeTab={activeTab}
+            onSelectTab={handleSelectTab}
+            onLogout={onLogout}
           />
         )}
 
-        {pollError && (
-          <p className="app__error">Error: {pollError.message}</p>
-        )}
+        <PageFrame isObsMode={isObsMode} showTitle={false}>
+          {/* OBS Mode: Force Now Playing only (ignoring whichever tab was active) */}
+          {isObsMode ? (
+            <>
+              <VinylCard>
+                <VinylRecord
+                  albumImages={track?.album?.images ?? null}
+                  isSpinning={isPlaying}
+                  onSkipNext={controls.skipToNext}
+                  onSkipPrevious={controls.skipToPrevious}
+                  isBusy={controls.isBusy}
+                  draggable={showControls}
+                  trackId={track?.id ?? null}
+                />
+                <TrackInfo
+                  track={track}
+                  isPlaying={isPlaying}
+                  smoothProgressMs={smoothProgressMs}
+                  isSkippingToQueueItem={controls.isSkippingToQueueItem}
+                  skippingTargetName={controls.skippingTargetName}
+                />
+              </VinylCard>
 
-        {/* Disconnect button (hidden in OBS mode unless ?controls=true) */}
-        {(!isObsMode || showControls) && (
-          <button className="logout-btn" onClick={onLogout}>
-            DISCONNECT
-          </button>
-        )}
-      </PageFrame>
+              <AudioVisualizer trackId={track?.id ?? 'idle'} isPlaying={isPlaying} />
+            </>
+          ) : (
+            <>
+              {/* Tab 1: Now Playing (VinylCard + AudioVisualizer) */}
+              {activeTab === 'now-playing' && (
+                <>
+                  <VinylCard>
+                    <VinylRecord
+                      albumImages={track?.album?.images ?? null}
+                      isSpinning={isPlaying}
+                      onSkipNext={controls.skipToNext}
+                      onSkipPrevious={controls.skipToPrevious}
+                      isBusy={controls.isBusy}
+                      draggable={true}
+                      trackId={track?.id ?? null}
+                    />
+                    <TrackInfo
+                      track={track}
+                      isPlaying={isPlaying}
+                      smoothProgressMs={smoothProgressMs}
+                      isSkippingToQueueItem={controls.isSkippingToQueueItem}
+                      skippingTargetName={controls.skippingTargetName}
+                    />
+                  </VinylCard>
+
+                  <AudioVisualizer trackId={track?.id ?? 'idle'} isPlaying={isPlaying} />
+                </>
+              )}
+
+              {/* Tab 2: Playing Next (QueueCarousel) */}
+              {activeTab === 'playing-next' && (
+                <QueueCarousel
+                  queue={queue}
+                  isLoading={queueLoading}
+                  error={queueError}
+                  refetchQueue={refetchQueue}
+                  onPlayQueueItem={controls.playQueueItem}
+                  onSwitchToNowPlaying={() => handleSelectTab('now-playing')}
+                />
+              )}
+
+              {/* Tab 3: Recently Played (RecentlyPlayedRail) */}
+              {activeTab === 'recently-played' && (
+                <RecentlyPlayedRail
+                  tracks={history.slice(0, 10)}
+                  isLoading={false}
+                  error={null}
+                  onPlayTrack={controls.playTrackUri}
+                />
+              )}
+
+              {/* Tab 4: Lyrics (LyricsPanel) */}
+              {activeTab === 'lyrics' && (
+                <LyricsPanel
+                  lyricsState={lyricsState}
+                  syncedLines={syncedLines}
+                  plainText={plainText}
+                  smoothProgressMs={smoothProgressMs}
+                />
+              )}
+
+              {/* Tab 5: Library (LibraryPanel) */}
+              {activeTab === 'library' && (
+                <LibraryPanel onPlayPlaylist={controls.playPlaylist} />
+              )}
+            </>
+          )}
+
+          {/* Playback Controls (hidden in OBS mode unless ?controls=true) */}
+          {(!isObsMode || showControls) && (
+            <ControlModule
+              controls={controls}
+              isPlaying={isPlaying}
+              hasContext={hasContext}
+              devices={devices}
+              activeDeviceId={activeDeviceId}
+              onSwitchDevice={switchDevice}
+            />
+          )}
+
+          {pollError && (
+            <p className="app__error">Error: {pollError.message}</p>
+          )}
+
+          {/* Disconnect button (hidden in OBS mode unless ?controls=true) */}
+          {isObsMode && showControls && (
+            <button className="logout-btn" onClick={onLogout}>
+              DISCONNECT
+            </button>
+          )}
+        </PageFrame>
+      </div>
     </ThemeProvider>
   );
 }

@@ -8,7 +8,7 @@ const CLIENT_ID = import.meta.env.VITE_SPOTIFY_CLIENT_ID;
 const REDIRECT_URI = import.meta.env.VITE_REDIRECT_URI;
 const AUTH_ENDPOINT = 'https://accounts.spotify.com/authorize';
 const TOKEN_ENDPOINT = 'https://accounts.spotify.com/api/token';
-const SCOPES = 'user-read-currently-playing user-read-playback-state user-modify-playback-state user-library-modify user-library-read user-read-recently-played';
+const SCOPES = 'user-read-currently-playing user-read-playback-state user-modify-playback-state user-library-modify user-library-read user-read-recently-played playlist-read-private playlist-read-collaborative';
 
 /**
  * Kick off the Spotify auth flow:

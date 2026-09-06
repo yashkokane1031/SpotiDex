@@ -4,6 +4,7 @@ import {
   pausePlayback,
   resumePlayback,
   playTracks,
+  playContext,
   setShuffle,
   setRepeat,
   skipNext,
@@ -255,6 +256,31 @@ export function usePlaybackControls({
     [isBusy, accessToken, refetch, refetchQueue, refetchPlaybackState]
   );
 
+  // --- Play a playlist context (used by Library) ---
+  const playPlaylist = useCallback(
+    async (playlistUri, trackUri = null) => {
+      if (isBusy || !accessToken || !playlistUri) return;
+
+      setIsBusy(true);
+      setError(null);
+
+      try {
+        await playContext(accessToken, playlistUri, trackUri);
+
+        await Promise.all([
+          refetch?.(),
+          refetchQueue?.(),
+          refetchPlaybackState?.(),
+        ]);
+      } catch (err) {
+        setError(err);
+      } finally {
+        setIsBusy(false);
+      }
+    },
+    [isBusy, accessToken, refetch, refetchQueue, refetchPlaybackState]
+  );
+
   return {
     togglePlayPause,
     skipToNext,
@@ -267,6 +293,7 @@ export function usePlaybackControls({
     hasContext,
     playQueueItem,
     playTrackUri,
+    playPlaylist,
     isSkippingToQueueItem,
     skippingTargetName,
     isBusy,
