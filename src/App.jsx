@@ -95,7 +95,7 @@ function NowPlayingView({ onLogout, isObsMode = false, showControls = true }) {
     setIsPlaying,
   } = useCurrentlyPlaying();
 
-  // Dynamic tab title: "♪ {track.name} — SpotiDex" or "SpotiDex"
+  // Dynamic tab title: "{track.name} - SpotiDex" or "SpotiDex"
   useDocumentTitle({ track, isPlaying });
 
   const {
