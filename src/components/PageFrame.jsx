@@ -6,7 +6,7 @@ import './PageFrame.css';
  *
  * @param {{ children: React.ReactNode, isObsMode?: boolean }} props
  */
-export default function PageFrame({ children, isObsMode = false, showTitle = false }) {
+export default function PageFrame({ children, isObsMode = false }) {
   if (isObsMode) {
     return (
       <div className="page-frame page-frame--obs">
@@ -36,15 +36,13 @@ export default function PageFrame({ children, isObsMode = false, showTitle = fal
         <div className="page-frame__line page-frame__line--3" />
       </div>
 
-      {/* Optional Title block */}
-      {showTitle && (
-        <div className="page-frame__title-block">
-          <h1 className="page-frame__title" data-text="SPOTIDEX">
-            SPOTIDEX
-          </h1>
-          <p className="page-frame__subtitle">NOW PLAYING SYSTEM</p>
-        </div>
-      )}
+      {/* Title block */}
+      <div className="page-frame__title-block">
+        <h1 className="page-frame__title" data-text="SPOTIDEX">
+          SPOTIDEX
+        </h1>
+        <p className="page-frame__subtitle">NOW PLAYING SYSTEM</p>
+      </div>
 
       {/* Content slot */}
       <div className="page-frame__content">

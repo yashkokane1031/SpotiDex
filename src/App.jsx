@@ -11,7 +11,7 @@ import { useObsMode } from './hooks/useObsMode';
 import { useDocumentTitle } from './hooks/useDocumentTitle';
 import { ThemeProvider } from './context/ThemeContext';
 import PageFrame from './components/PageFrame';
-import SideNav from './components/SideNav';
+import TabBar from './components/TabBar';
 import VinylCard from './components/VinylCard';
 import VinylRecord from './components/VinylRecord';
 import TrackInfo from './components/TrackInfo';
@@ -36,11 +36,11 @@ function App() {
     <>
       <ReloadPrompt />
       {!isOnline ? (
-        <PageFrame isObsMode={isObsMode} showTitle={true}>
+        <PageFrame isObsMode={isObsMode}>
           <OfflineFallback onRetry={() => window.location.reload()} />
         </PageFrame>
       ) : authLoading ? (
-        <PageFrame isObsMode={isObsMode} showTitle={true}>
+        <PageFrame isObsMode={isObsMode}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flex: 1 }}>
             <p style={{ fontFamily: "'VT323', monospace", fontSize: '24px', color: 'var(--ink)', opacity: 0.6 }}>
               Loading…
@@ -48,7 +48,7 @@ function App() {
           </div>
         </PageFrame>
       ) : !isAuthenticated ? (
-        <PageFrame isObsMode={isObsMode} showTitle={true}>
+        <PageFrame isObsMode={isObsMode}>
           <VinylCard>
             <VinylRecord albumImages={null} isSpinning={false} draggable={false} />
             <LoginPanel onLogin={login} />
@@ -212,19 +212,14 @@ function NowPlayingView({ onLogout, isObsMode = false, showControls = true }) {
 
   return (
     <ThemeProvider albumArtUrl={albumArtUrl}>
-      <div className={`app-layout${isObsMode ? ' app-layout--obs' : ''}`}>
-        {/* SideNav (hidden in OBS mode) */}
+      <PageFrame isObsMode={isObsMode}>
+        {/* Tab Bar (hidden in OBS mode) */}
         {!isObsMode && (
-          <SideNav
-            activeTab={activeTab}
-            onSelectTab={handleSelectTab}
-            onLogout={onLogout}
-          />
+          <TabBar activeTab={activeTab} onSelectTab={handleSelectTab} />
         )}
 
-        <PageFrame isObsMode={isObsMode} showTitle={false}>
-          {/* OBS Mode: Force Now Playing only (ignoring whichever tab was active) */}
-          {isObsMode ? (
+        {/* OBS Mode: Force Now Playing only (ignoring whichever tab was active) */}
+        {isObsMode ? (
             <>
               <VinylCard>
                 <VinylRecord
@@ -331,13 +326,12 @@ function NowPlayingView({ onLogout, isObsMode = false, showControls = true }) {
           )}
 
           {/* Disconnect button (hidden in OBS mode unless ?controls=true) */}
-          {isObsMode && showControls && (
-            <button className="logout-btn" onClick={onLogout}>
-              DISCONNECT
-            </button>
-          )}
-        </PageFrame>
-      </div>
+        {(!isObsMode || showControls) && (
+          <button className="logout-btn" onClick={onLogout}>
+            DISCONNECT
+          </button>
+        )}
+      </PageFrame>
     </ThemeProvider>
   );
 }
