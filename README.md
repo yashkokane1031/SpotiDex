@@ -16,9 +16,10 @@
 [![Vite](https://img.shields.io/badge/Vite-8.x-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
 [![React](https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev/)
 [![Spotify API](https://img.shields.io/badge/Spotify-Web_API-1DB954?style=for-the-badge&logo=spotify&logoColor=white)](https://developer.spotify.com/)
+[![PWA Ready](https://img.shields.io/badge/PWA-Installable-blueviolet?style=for-the-badge&logo=pwa&logoColor=white)](https://web.dev/progressive-web-apps/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
 
-[Features](#-what-makes-spotidex-different) • [Quickstart](#-getting-started) • [OBS Overlay](#-obs-studio-overlay-mode) • [Keyboard Shortcuts](#-keyboard-shortcuts) • [Known Limitations](#-real-talk-known-limitations)
+[Features](#-what-makes-spotidex-different) • [Quickstart](#-getting-started) • [PWA Install](#-progressive-web-app-pwa) • [OBS Overlay](#-obs-studio-overlay-mode) • [Keyboard Shortcuts](#-keyboard-shortcuts) • [Known Limitations](#-real-talk-known-limitations)
 
 </div>
 
@@ -34,10 +35,13 @@ Modern streaming apps are convenient, but they're sterile. Flat gray rectangles,
 - Vinyl records you can grab and flick across the screen to skip songs.
 - Dynamic color alchemy that bathes your display in the hues of whatever album is spinning—with automated WCAG contrast correction so it never becomes an illegible neon mess.
 - An animated, deterministic 36-bar LED audio visualizer.
-- A 3D perspective queue carousel and real-time karaoke lyrics.
+- A 3D perspective queue carousel with 1-click card play.
+- Real-time karaoke lyrics synchronized to playback.
+- A dedicated Playlists & Library explorer with context playback.
+- Installable as a standalone offline-shielded Progressive Web App (PWA).
 - A transparent, zero-overhead HUD mode built specifically for OBS streamers.
 
-No servers, no hidden backends, and no proprietary lock-in. Just pure client-side React and PKCE OAuth running straight from your browser.
+No servers, no hidden backends, and no proprietary lock-in. Just pure client-side React and PKCE OAuth running straight from your browser or desktop desktop app frame.
 
 ---
 
@@ -57,7 +61,7 @@ No servers, no hidden backends, and no proprietary lock-in. Just pure client-sid
 | 🎠 3D Depth Queue Carousel | 🎤 Synced Karaoke Lyrics |
 |:---:|:---:|
 | <img src="./Misc/PlayingNext.png" alt="Queue Carousel" width="100%" /> | <img src="./Misc/Lyrics.png" alt="Synced Lyrics" width="100%" /> |
-| *Browse upcoming queue in an interactive 3D cylinder with click-to-play* | *Real-time line-by-line synced lyrics highlighting powered by LRCLIB* |
+| *Browse upcoming queue in an interactive 3D cylinder with direct click-to-play* | *Real-time line-by-line synced lyrics highlighting powered by LRCLIB* |
 
 <br/>
 
@@ -85,9 +89,15 @@ No servers, no hidden backends, and no proprietary lock-in. Just pure client-sid
 - Spotify's Web API does not stream raw PCM audio bytes to third-party web apps. Instead of faking it with jittery random noise, SpotiDex uses a **Mulberry32 PRNG seeded by the unique Spotify Track ID**.
 - Every song generates its own distinct, reproducible 36-bar harmonic rhythm pattern across 8 discrete LED levels. When paused, the visualizer gracefully settles down to an ambient standby baseline.
 
-### 🎠 3D Perspective Queue Carousel
-- Switch over to the **QUEUE** tab to browse upcoming songs arranged in an interactive 3D cylinder powered by **GSAP**.
-- Scroll with your trackpad/mouse wheel, drag horizontally, or click any queued vinyl card to break into the playlist and jump straight to that track.
+### 🎠 3D Perspective Queue Carousel (With Click-to-Play)
+- Switch over to the **PLAYING NEXT** tab to browse upcoming songs arranged in an interactive 3D cylinder powered by **GSAP**.
+- Scroll with your trackpad/mouse wheel or drag horizontally to browse. Click **any song card** to jump directly to that track—equipped with smooth hover play indicators and drag cancellation so browsing is never confused with playing.
+
+### 📚 Interactive Playlists & Library Hub
+- Explore your Spotify collection inside the retro pixel interface via the **PLAYLISTS** tab.
+- Automatically organizes your playlists into **YOUR PLAYLISTS** and **FOLLOWED PLAYLISTS**.
+- Drill into any playlist to inspect track names, artists, durations, and album thumbnails.
+- Start full playlist context playback with **1 click** (`▶ PLAY PLAYLIST`) or jump straight to any specific track in the list.
 
 ### 🎤 Synchronized Karaoke Lyrics
 - Live line-by-line synchronized lyrics powered by the community-maintained [LRCLIB](https://lrclib.net/) database.
@@ -96,6 +106,12 @@ No servers, no hidden backends, and no proprietary lock-in. Just pure client-sid
 ### 📜 Local "Audio Dex" History Log
 - Spotify's recent history endpoint is notorious for 403 errors and caching issues on developer apps. SpotiDex sidesteps this by maintaining a local, persistent listening log in `localStorage` (capped at 50 tracks).
 - Relive your session history and click any past track to re-cue it instantly (automatically toggling off shuffle so your selection plays immediately).
+
+### 📱 Standalone Progressive Web App (PWA)
+- Install SpotiDex as a standalone app directly to your desktop or mobile home screen.
+- Features custom pixel icons, standalone display mode, and background theme synchronization.
+- **Smart Update Protection**: Uses a prompt-based update toast so updates never interrupt or reload an active music session mid-song.
+- **Live-Data Caching Protection**: The Service Worker precaches the retro UI shell while enforcing strict network bypasses on Spotify and LRCLIB APIs, ensuring your telemetry is always live.
 
 ---
 
@@ -119,6 +135,7 @@ Take control without ever taking your hands off the keyboard:
 
 - **Core**: [React 19](https://react.dev/) + [Vite](https://vitejs.dev/) (lightning-fast HMR and minimal bundle footprint)
 - **Spotify Auth**: Client-side **OAuth 2.0 PKCE** (Proof Key for Code Exchange). Zero backend servers required. No secrets baked into frontend code.
+- **Progressive Web App**: `vite-plugin-pwa` with Workbox precaching, custom manifest, and network-only telemetry caching.
 - **Animation & 3D Math**: [GSAP](https://greensock.com/gsap/) for smooth 3D stage depth rendering, drag resistance, and carousel transforms.
 - **Palette Extraction**: [`node-vibrant/browser`](https://github.com/Vibrant-Colors/node-vibrant) with custom luminance math and contrast clamping.
 - **Lyrics Engine**: [LRCLIB](https://lrclib.net/) REST API with timestamp parser and fuzzy search fallback.
@@ -173,6 +190,16 @@ Open **`http://127.0.0.1:5173`** in your browser, click **CONNECT SPOTIFY**, and
 
 ---
 
+## 📱 Progressive Web App (PWA)
+
+SpotiDex can be installed directly as a standalone app on macOS, Windows, Linux, Android, and iOS:
+- **Chrome / Edge / Brave**: Click the install icon in the URL bar or select **Install SpotiDex** from the browser menu.
+- **iOS / Safari**: Tap **Share** > **Add to Home Screen**.
+- Includes an offline fallback screen with retro pixel visuals and a manual retry button.
+- Clean update toast alerts you when a new release is built without forcing mid-track reloads.
+
+---
+
 ## 📺 OBS Studio Overlay Mode
 
 SpotiDex comes with a first-class stream overlay mode that strips away page margins, headers, and backgrounds—giving you a 100% transparent pixel-art deck that floats cleanly over gameplay or webcam scenes.
@@ -221,7 +248,7 @@ We believe in being 100% upfront about platform boundaries rather than hiding bu
 3. **Lyrics Completeness**:
    - Lyrics are fetched from the crowd-powered [LRCLIB](https://lrclib.net/) database. While coverage for popular releases is fantastic, obscure underground b-sides, indie demos, or instrumental interludes may not have synced lines available.
 4. **Spotify Premium Required for Full Playback Control**:
-   - Due to Spotify's Web API architecture, playback commands (play, pause, skip, seek, transfer device) require an active **Spotify Premium** account. Free tier accounts can only read currently playing metadata.
+   - Due to Spotify's Web API architecture, playback commands (play, pause, skip, seek, transfer device, and playlist playback) require an active **Spotify Premium** account. Free tier accounts can only read currently playing metadata.
 
 ---
 
