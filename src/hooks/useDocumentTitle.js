@@ -10,18 +10,24 @@ import { useEffect } from 'react';
  */
 export function useDocumentTitle({ track, isPlaying }) {
   useEffect(() => {
-    const isStandalone = typeof window !== 'undefined' && (
+    // Robust detection for installed PWA / Chrome app windows (no address bar)
+    const isAppWindow = typeof window !== 'undefined' && (
       window.matchMedia('(display-mode: standalone)').matches ||
-      window.navigator.standalone === true
+      window.matchMedia('(display-mode: minimal-ui)').matches ||
+      window.matchMedia('(display-mode: window-controls-overlay)').matches ||
+      window.navigator.standalone === true ||
+      (window.locationbar && !window.locationbar.visible) ||
+      (window.menubar && !window.menubar.visible) ||
+      (window.outerHeight > 0 && window.innerHeight > 0 && (window.outerHeight - window.innerHeight < 90))
     );
 
     if (track?.name) {
-      if (isStandalone) {
-        // In standalone PWA, Chromium/Windows title bar forcibly prepends "SpotiDex - ".
-        // Keeping document.title to track.name avoids repeating "SpotiDex" twice.
+      if (isAppWindow) {
+        // In an installed PWA window, Windows/Chromium forcibly prepends "SpotiDex - ".
+        // Setting document.title to track.name produces "SpotiDex - <Song Name>" (no duplicate SpotiDex).
         document.title = track.name;
       } else {
-        // In browser tabs: song name first, then hyphen SpotiDex
+        // In regular browser tabs (with address bar), display "<Song Name> - SpotiDex" (song name first)
         document.title = `${track.name} - SpotiDex`;
       }
     } else {
