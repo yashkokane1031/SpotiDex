@@ -357,54 +357,82 @@ export async function getUserPlaylists(accessToken) {
 
 /**
  * Fetch tracks from a playlist (up to 50).
+ * Uses /items (modern Spotify Web API) with fallbacks.
  *
  * @param {string} accessToken
  * @param {string} playlistId
  * @returns {Promise<Array<{ id: string, uri: string, name: string, artist: string, album: string, image: string, durationMs: number }>>}
  */
 export async function getPlaylistTracks(accessToken, playlistId) {
-  const response = await fetch(`${BASE_URL}/playlists/${encodeURIComponent(playlistId)}/tracks?limit=50`, {
-    headers: { Authorization: `Bearer ${accessToken}` },
-  });
+  const id = encodeURIComponent(playlistId);
+  const headers = { Authorization: `Bearer ${accessToken}` };
 
-  if (response.status === 204) {
-    return [];
-  }
+  // Spotify Web API February 2026 update: /tracks was renamed to /items
+  const endpoints = [
+    `${BASE_URL}/playlists/${id}/items?limit=50`,
+    `${BASE_URL}/playlists/${id}/tracks?limit=50`,
+    `${BASE_URL}/playlists/${id}`,
+  ];
 
-  if (response.status === 401) {
-    const error = new Error('Access token expired');
-    error.status = 401;
-    throw error;
-  }
+  let lastError = null;
+  let rawItems = null;
 
-  if (!response.ok) {
-    let errorDetail = `Spotify API error: ${response.status}`;
+  for (const url of endpoints) {
     try {
-      const errJson = await response.json();
-      if (errJson?.error?.message) {
-        errorDetail = errJson.error.message;
+      const response = await fetch(url, { headers });
+
+      if (response.status === 204) {
+        return [];
       }
-    } catch {
-      // ignore
+
+      if (response.status === 401) {
+        const error = new Error('Access token expired');
+        error.status = 401;
+        throw error;
+      }
+
+      if (response.ok) {
+        const data = await response.json();
+        // Check if response is { items: [...] } or { tracks: { items: [...] } } or { items: { items: [...] } }
+        const candidate = data.items || data.tracks?.items || data.items?.items || (Array.isArray(data) ? data : null);
+        if (candidate && Array.isArray(candidate)) {
+          rawItems = candidate;
+          break;
+        }
+      } else {
+        let errorDetail = `Spotify API error: ${response.status}`;
+        try {
+          const errJson = await response.json();
+          if (errJson?.error?.message) {
+            errorDetail = errJson.error.message;
+          }
+        } catch {
+          // ignore JSON parse error
+        }
+        const err = new Error(errorDetail);
+        err.status = response.status;
+        lastError = err;
+      }
+    } catch (err) {
+      if (err.status === 401) throw err;
+      lastError = err;
     }
-    const error = new Error(errorDetail);
-    error.status = response.status;
-    throw error;
   }
 
-  const data = await response.json();
-  const rawItems = data.items || [];
+  if (!rawItems) {
+    throw lastError || new Error('Failed to load playlist tracks');
+  }
 
   return rawItems
-    .filter((item) => item && item.track && item.track.id)
-    .map((item) => {
-      const t = item.track;
+    .map((item) => item?.track || item?.item || item)
+    .filter((t) => t && (t.id || t.uri))
+    .map((t) => {
       const images = t.album?.images || [];
       const image = images[images.length - 1]?.url || images[0]?.url || '';
-      const artist = (t.artists || []).map((a) => a.name).join(', ') || 'Unknown Artist';
+      const artist = (t.artists || []).map((a) => (typeof a === 'string' ? a : a.name)).join(', ') || 'Unknown Artist';
 
       return {
-        id: t.id,
+        id: t.id || t.uri,
         uri: t.uri || `spotify:track:${t.id}`,
         name: t.name || 'Unknown Track',
         artist,

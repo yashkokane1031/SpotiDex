@@ -52,7 +52,7 @@ export function useLibrary({ enabled = true } = {}) {
           uri: pl.uri,
           name: pl.name || 'Untitled Playlist',
           description: pl.description || '',
-          tracksCount: pl.tracks?.total ?? 0,
+          tracksCount: pl.items?.total ?? pl.tracks?.total ?? 0,
           image,
           ownerName: pl.owner?.display_name || pl.owner?.id || 'Spotify',
           isOwner,

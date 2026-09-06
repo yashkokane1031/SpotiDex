@@ -52,16 +52,7 @@ export default function LibraryPanel({ onPlayPlaylist }) {
       {/* Error display */}
       {(error || tracksError) && (
         <div className="library-error">
-          {(error || tracksError)?.status === 403 ||
-          (error || tracksError)?.message?.includes('403') ||
-          (error || tracksError)?.message?.toLowerCase().includes('scope') ||
-          (error || tracksError)?.message?.toLowerCase().includes('permission') ? (
-            <span>
-              PERMISSION UPDATE REQUIRED: Click DISCONNECT at the bottom and reconnect Spotify to enable playlist track access.
-            </span>
-          ) : (
-            (error || tracksError).message || 'Failed to load Spotify library data.'
-          )}
+          {(error || tracksError).message || 'Failed to load Spotify library data.'}
         </div>
       )}
 
