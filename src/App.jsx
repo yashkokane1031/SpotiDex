@@ -21,43 +21,48 @@ import QueueCarousel from './components/QueueCarousel';
 import RecentlyPlayedRail from './components/RecentlyPlayedRail';
 import LyricsPanel from './components/LyricsPanel';
 import { ErrorBoundary } from './components/ErrorBoundary';
+import { useNetworkStatus } from './hooks/useNetworkStatus';
+import OfflineFallback from './components/OfflineFallback';
+import ReloadPrompt from './components/ReloadPrompt';
 import './App.css';
 
 function App() {
   const { isAuthenticated, isLoading: authLoading, login, logout } = useAuth();
   const { isObsMode, showControls } = useObsMode();
-
-  if (authLoading) {
-    return (
-      <PageFrame isObsMode={isObsMode}>
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flex: 1 }}>
-          <p style={{ fontFamily: "'VT323', monospace", fontSize: '24px', color: 'var(--ink)', opacity: 0.6 }}>
-            Loading…
-          </p>
-        </div>
-      </PageFrame>
-    );
-  }
-
-  if (!isAuthenticated) {
-    return (
-      <PageFrame isObsMode={isObsMode}>
-        <VinylCard>
-          <VinylRecord albumImages={null} isSpinning={false} draggable={false} />
-          <LoginPanel onLogin={login} />
-        </VinylCard>
-      </PageFrame>
-    );
-  }
+  const isOnline = useNetworkStatus();
 
   return (
-    <ErrorBoundary>
-      <NowPlayingView
-        onLogout={logout}
-        isObsMode={isObsMode}
-        showControls={showControls}
-      />
-    </ErrorBoundary>
+    <>
+      <ReloadPrompt />
+      {!isOnline ? (
+        <PageFrame isObsMode={isObsMode}>
+          <OfflineFallback onRetry={() => window.location.reload()} />
+        </PageFrame>
+      ) : authLoading ? (
+        <PageFrame isObsMode={isObsMode}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flex: 1 }}>
+            <p style={{ fontFamily: "'VT323', monospace", fontSize: '24px', color: 'var(--ink)', opacity: 0.6 }}>
+              Loading…
+            </p>
+          </div>
+        </PageFrame>
+      ) : !isAuthenticated ? (
+        <PageFrame isObsMode={isObsMode}>
+          <VinylCard>
+            <VinylRecord albumImages={null} isSpinning={false} draggable={false} />
+            <LoginPanel onLogin={login} />
+          </VinylCard>
+        </PageFrame>
+      ) : (
+        <ErrorBoundary>
+          <NowPlayingView
+            onLogout={logout}
+            isObsMode={isObsMode}
+            showControls={showControls}
+          />
+        </ErrorBoundary>
+      )}
+    </>
   );
 }
 

@@ -1,0 +1,112 @@
+/* === PWA Update Prompt Toast === */
+.pwa-toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 18px;
+  background-color: var(--chrome-card, #161024);
+  border: 3px solid var(--accent, #e85fa8);
+  box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.8), 0 0 16px rgba(232, 95, 168, 0.25);
+  font-family: 'VT323', monospace;
+  animation: pwaToastSlideIn 0.25s cubic-bezier(0, 0, 0.2, 1);
+}
+
+@keyframes pwaToastSlideIn {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.pwa-toast__content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.pwa-toast__badge {
+  display: inline-block;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 8px;
+  color: #fff;
+  background-color: var(--accent, #e85fa8);
+  padding: 3px 6px;
+  letter-spacing: 1px;
+  width: fit-content;
+  border: 1px solid #000;
+}
+
+.pwa-toast__msg {
+  font-size: 18px;
+  color: var(--chrome-ink, #f4c9e8);
+  letter-spacing: 0.5px;
+}
+
+.pwa-toast__actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pwa-toast__btn {
+  font-family: 'VT323', monospace;
+  font-size: 18px;
+  cursor: pointer;
+  border: 2px solid #000;
+  box-shadow: 2px 2px 0px #000;
+  transition: transform 0.08s, background-color 0.15s, filter 0.15s;
+}
+
+.pwa-toast__btn:active {
+  transform: translate(1px, 1px);
+  box-shadow: 1px 1px 0px #000;
+}
+
+.pwa-toast__btn--update {
+  padding: 6px 14px;
+  background-color: var(--accent, #e85fa8);
+  color: #fff;
+}
+
+.pwa-toast__btn--update:hover {
+  filter: brightness(1.15);
+}
+
+.pwa-toast__btn--dismiss {
+  padding: 6px 10px;
+  background-color: transparent;
+  color: var(--chrome-dim, rgba(244, 201, 232, 0.5));
+  border-color: var(--chrome-dim, rgba(244, 201, 232, 0.35));
+}
+
+.pwa-toast__btn--dismiss:hover {
+  color: #fff;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+@media (max-width: 600px) {
+  .pwa-toast {
+    left: 16px;
+    right: 16px;
+    bottom: 16px;
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+  }
+
+  .pwa-toast__badge {
+    margin: 0 auto;
+  }
+
+  .pwa-toast__actions {
+    justify-content: center;
+  }
+}

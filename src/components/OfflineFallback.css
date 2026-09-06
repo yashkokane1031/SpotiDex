@@ -1,0 +1,110 @@
+/* === Offline Fallback Component (matches ErrorBoundary styling) === */
+.offline-fallback {
+  max-width: 480px;
+  width: 100%;
+  margin: 2rem auto;
+  background-color: var(--chrome-card, #161024);
+  border: 3px solid var(--chrome-border, #43325d);
+  box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.6);
+  padding: 28px;
+  text-align: center;
+  font-family: 'VT323', monospace;
+  color: var(--chrome-ink, #f3e8f7);
+  animation: offlineFadeIn 0.3s ease-out;
+}
+
+@keyframes offlineFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.offline-fallback__badge {
+  display: inline-block;
+  padding: 4px 12px;
+  background-color: #d97706;
+  color: #fff;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 9px;
+  letter-spacing: 2px;
+  margin-bottom: 16px;
+  border: 2px solid #000;
+  box-shadow: 2px 2px 0px #000;
+}
+
+.offline-fallback__title {
+  font-size: 26px;
+  margin: 0 0 12px 0;
+  line-height: 1.2;
+  color: var(--chrome-ink, #f3e8f7);
+  letter-spacing: 0.5px;
+}
+
+.offline-fallback__desc {
+  font-size: 18px;
+  color: var(--chrome-dim, #a89bb8);
+  margin: 0 0 20px 0;
+  line-height: 1.35;
+}
+
+.offline-fallback__status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 16px;
+  color: #f59e0b;
+  margin-bottom: 22px;
+  letter-spacing: 1px;
+}
+
+.offline-fallback__pulse {
+  width: 8px;
+  height: 8px;
+  background-color: #f59e0b;
+  animation: offlinePulse 1.2s infinite ease-in-out;
+}
+
+@keyframes offlinePulse {
+  0%, 100% {
+    opacity: 0.25;
+    transform: scale(0.85);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+}
+
+.offline-fallback__actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.offline-fallback__btn {
+  font-family: 'VT323', monospace;
+  font-size: 20px;
+  padding: 8px 20px;
+  background-color: var(--accent, #e85fa8);
+  color: #fff;
+  border: 2px solid #000;
+  box-shadow: 2px 2px 0px #000;
+  cursor: pointer;
+  transition: transform 0.08s, filter 0.15s;
+}
+
+.offline-fallback__btn:hover {
+  filter: brightness(1.15);
+}
+
+.offline-fallback__btn:active {
+  transform: translate(1px, 1px);
+  box-shadow: 1px 1px 0px #000;
+}
