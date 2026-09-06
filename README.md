@@ -19,7 +19,7 @@
 [![PWA Ready](https://img.shields.io/badge/PWA-Installable-blueviolet?style=for-the-badge&logo=pwa&logoColor=white)](https://web.dev/progressive-web-apps/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
 
-[Features](#-what-makes-spotidex-different) • [Quickstart](#-getting-started) • [PWA Install](#-progressive-web-app-pwa) • [OBS Overlay](#-obs-studio-overlay-mode) • [Keyboard Shortcuts](#-keyboard-shortcuts) • [Known Limitations](#-real-talk-known-limitations)
+[Features](#-what-makes-spotidex-different) • [Screenshots](#-screenshots--vibe-check) • [Quickstart](#-getting-started) • [PWA Install](#-progressive-web-app-pwa) • [OBS Overlay](#-obs-studio-overlay-mode) • [Keyboard Shortcuts](#-keyboard-shortcuts) • [Known Limitations](#-real-talk-known-limitations)
 
 </div>
 
@@ -41,7 +41,7 @@ Modern streaming apps are convenient, but they're sterile. Flat gray rectangles,
 - Installable as a standalone offline-shielded Progressive Web App (PWA).
 - A transparent, zero-overhead HUD mode built specifically for OBS streamers.
 
-No servers, no hidden backends, and no proprietary lock-in. Just pure client-side React and PKCE OAuth running straight from your browser or desktop desktop app frame.
+No servers, no hidden backends, and no proprietary lock-in. Just pure client-side React and PKCE OAuth running straight from your browser or desktop app frame.
 
 ---
 
@@ -55,6 +55,15 @@ No servers, no hidden backends, and no proprietary lock-in. Just pure client-sid
 <img src="./Misc/NowPlaying.png" alt="SpotiDex Now Playing View" width="100%" />
 
 <br/><br/>
+
+### 📚 Playlists & Library Explorer
+
+| 🗂️ Playlists Grid | 🎵 Tracklist & Context Player |
+|:---:|:---:|
+| <img src="./Misc/Playlists1.png" alt="Playlists Grid View" width="100%" /> | <img src="./Misc/Playlists2.png" alt="Playlist Tracklist View" width="100%" /> |
+| *Browse your created and followed playlists in a retro folder grid* | *Inspect song details, durations, and start 1-click playlist context playback* |
+
+<br/>
 
 ### 🎠 3D Depth Queue Carousel & 🎤 Synced Karaoke Lyrics
 
