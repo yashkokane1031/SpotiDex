@@ -378,7 +378,16 @@ export async function getPlaylistTracks(accessToken, playlistId) {
   }
 
   if (!response.ok) {
-    const error = new Error(`Spotify API error: ${response.status}`);
+    let errorDetail = `Spotify API error: ${response.status}`;
+    try {
+      const errJson = await response.json();
+      if (errJson?.error?.message) {
+        errorDetail = errJson.error.message;
+      }
+    } catch {
+      // ignore
+    }
+    const error = new Error(errorDetail);
     error.status = response.status;
     throw error;
   }
