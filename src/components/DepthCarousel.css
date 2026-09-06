@@ -122,36 +122,43 @@
   text-overflow: ellipsis;
 }
 
-/* Explicit pixel play button on focused card */
-.depth-carousel__card-play {
+.depth-carousel__card:hover,
+.depth-carousel__card:focus-visible {
+  border-color: var(--accent);
+}
+
+.depth-carousel__img-wrap {
+  position: relative;
+  width: 100%;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  display: flex;
+}
+
+/* Play Overlay on Hover — similar to RecentlyPlayedRail */
+.depth-carousel__overlay {
   position: absolute;
-  top: 8px;
-  right: 8px;
-  z-index: 100;
-  display: inline-flex;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  display: flex;
   align-items: center;
-  gap: 5px;
-  font-family: 'Press Start 2P', cursive;
-  font-size: 8px;
-  padding: 5px 8px;
-  background: var(--accent);
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.depth-carousel__card:hover .depth-carousel__overlay,
+.depth-carousel__card:focus-visible .depth-carousel__overlay {
+  opacity: 1;
+}
+
+.depth-carousel__play-icon {
+  font-size: 28px;
   color: var(--card);
-  border: 2px solid var(--ink);
-  box-shadow: 2px 2px 0 var(--ink);
-  border-radius: 0;
-  cursor: pointer;
-  pointer-events: auto;
-  transition: background 0.12s, transform 0.1s, box-shadow 0.1s;
-}
-
-.depth-carousel__card-play:hover {
-  background: var(--card);
-  color: var(--ink);
-}
-
-.depth-carousel__card-play:active {
-  transform: translate(2px, 2px);
-  box-shadow: 0 0 0 var(--ink);
+  filter: drop-shadow(0 0 6px var(--accent));
 }
 
 /* Receding depth tint overlay */

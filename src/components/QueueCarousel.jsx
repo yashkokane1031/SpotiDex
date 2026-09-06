@@ -117,19 +117,9 @@ export default function QueueCarousel({
             </span>
           </div>
 
-          <div className="queue-carousel-panel__footer-actions">
-            <button
-              type="button"
-              className="queue-carousel-panel__play-btn"
-              onClick={() => handlePlay(focusedIndex, currentFocusedTrack)}
-              title={`Play ${currentFocusedTrack.name}`}
-            >
-              <svg viewBox="0 0 16 16" width="10" height="10" fill="currentColor">
-                <path d="M4 2l10 6-10 6z" />
-              </svg>
-              <span>PLAY TRACK</span>
-            </button>
-          </div>
+          <span className="queue-carousel-panel__hint">
+            CLICK CARD TO PLAY
+          </span>
         </div>
       )}
 

@@ -55,6 +55,7 @@ const DepthCarousel = ({
   const onChangeRef = useRef(onChange);
 
   const dragRef = useRef(null);
+  const wasDraggedRef = useRef(false);
   const wheelTimerRef = useRef(null);
   const autoTimerRef = useRef(null);
   const reducedRef = useRef(false);
@@ -216,6 +217,7 @@ const DepthCarousel = ({
     const cfg = cfgRef.current;
     if (cfg.count < 2) return;
     tweenRef.current?.kill();
+    wasDraggedRef.current = false;
     dragRef.current = {
       x: e.clientX,
       startPos: posRef.current,
@@ -236,6 +238,7 @@ const DepthCarousel = ({
       const dx = e.clientX - drag.x;
       if (!drag.moved && Math.abs(dx) > 4) {
         drag.moved = true;
+        wasDraggedRef.current = true;
         rootRef.current?.setPointerCapture(drag.id);
       }
       if (!drag.moved) return;
@@ -259,6 +262,9 @@ const DepthCarousel = ({
     const stepPx = Math.max(cfg.cardWidth * 0.55 * scaleRef.current, 40);
     const projected = posRef.current - (drag.v * 180) / stepPx;
     setFocus(Math.round(projected), true);
+    setTimeout(() => {
+      wasDraggedRef.current = false;
+    }, 120);
   }, [setFocus]);
 
   const onKeyDown = useCallback(
@@ -275,11 +281,11 @@ const DepthCarousel = ({
   );
 
   const onCardClick = useCallback(
-    index => {
-      if (dragRef.current?.moved) return;
-      setFocus(index, true);
+    (index, item) => {
+      if (wasDraggedRef.current) return;
+      onPlayItem?.(index, item);
     },
-    [setFocus]
+    [onPlayItem]
   );
 
   useEffect(() => {
@@ -365,15 +371,29 @@ const DepthCarousel = ({
             aria-roledescription="slide"
             aria-label={`${i + 1} of ${count}`}
             aria-hidden={active !== i}
-            onClick={() => onCardClick(i)}
+            role="button"
+            tabIndex={0}
+            title={`Click to play ${item.name || 'track'}${item.artists ? ` by ${item.artists}` : ''}`}
+            onClick={() => onCardClick(i, item)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                onPlayItem?.(i, item);
+              }
+            }}
           >
-            {item.image ? (
-              <img className="depth-carousel__img" src={item.image} alt={item.alt || ''} draggable={false} />
-            ) : (
-              <div className="depth-carousel__placeholder">
-                <span className="depth-carousel__placeholder-icon">♪</span>
+            <div className="depth-carousel__img-wrap">
+              {item.image ? (
+                <img className="depth-carousel__img" src={item.image} alt={item.alt || ''} draggable={false} />
+              ) : (
+                <div className="depth-carousel__placeholder">
+                  <span className="depth-carousel__placeholder-icon">♪</span>
+                </div>
+              )}
+              <div className="depth-carousel__overlay">
+                <span className="depth-carousel__play-icon">▶</span>
               </div>
-            )}
+            </div>
 
             {(item.name || item.artists) && (
               <div className="depth-carousel__card-meta">
@@ -381,23 +401,6 @@ const DepthCarousel = ({
                 <div className="depth-carousel__card-title" title={item.name}>{item.name}</div>
                 <div className="depth-carousel__card-artist" title={item.artists}>{item.artists}</div>
               </div>
-            )}
-
-            {active === i && onPlayItem && (
-              <button
-                type="button"
-                className="depth-carousel__card-play"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  onPlayItem(i, item);
-                }}
-                title={`Play ${item.name}`}
-              >
-                <svg viewBox="0 0 16 16" width="10" height="10" fill="currentColor">
-                  <path d="M4 2l10 6-10 6z" />
-                </svg>
-                <span>PLAY</span>
-              </button>
             )}
 
             <span
