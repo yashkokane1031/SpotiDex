@@ -1,0 +1,21 @@
+{
+  "0": "App.jsx",
+  "1": "package.json",
+  "2": "react",
+  "3": "extractPalette.js",
+  "4": "spotifyApi.js",
+  "5": "DepthCarousel.jsx",
+  "6": "useDex.js",
+  "7": "LibraryPanel.jsx",
+  "8": "💽 SpotiDex",
+  "9": "AudioVisualizer.jsx",
+  "10": "lyricsApi.js",
+  "11": "Q: Trace the complete authentication flow: Spotify login -> PKCE code generation -> Spotify authorization -> callback -> access token/session -> authenticated application state.",
+  "12": ".oxlintrc.json",
+  "13": "Synced Lyrics UI Screenshot",
+  "14": "Now Playing View UI Screenshot",
+  "15": "Playlists Grid UI Screenshot",
+  "16": "Playlists Tracklist UI Screenshot",
+  "17": "Recently Played History UI Screenshot",
+  "18": "Q: create a Spotify playlist from current queue"
+}

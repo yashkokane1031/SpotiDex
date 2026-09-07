@@ -11,7 +11,7 @@
   ╚══════╝╚═╝      ╚═════╝    ╚═╝   ╚═╝╚═════╝ ╚══════╝╚═╝  ╚═╝
 ```
 
-### *A retro hi-fi pixel-art Spotify companion with dynamic album-art theming.*
+### *A retro hi-fi pixel-art Spotify companion with dynamic album-art theming & artist Pokédex.*
 
 [![Vite](https://img.shields.io/badge/Vite-8.x-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
 [![React](https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev/)
@@ -19,7 +19,7 @@
 [![PWA Ready](https://img.shields.io/badge/PWA-Installable-blueviolet?style=for-the-badge&logo=pwa&logoColor=white)](https://web.dev/progressive-web-apps/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
 
-[Features](#-what-makes-spotidex-different) • [Screenshots](#-screenshots--vibe-check) • [Quickstart](#-getting-started) • [PWA Install](#-progressive-web-app-pwa) • [OBS Overlay](#-obs-studio-overlay-mode) • [Keyboard Shortcuts](#-keyboard-shortcuts) • [Known Limitations](#-real-talk-known-limitations)
+[Features](#-what-makes-spotidex-different) • [Screenshots](#-screenshots--vibe-check) • [The Dex](#-the-dex-pokedex-style-artist-collection) • [Quickstart](#-getting-started) • [PWA Install](#-progressive-web-app-pwa) • [OBS Overlay](#-obs-studio-overlay-mode) • [Keyboard Shortcuts](#-keyboard-shortcuts) • [Known Limitations](#-real-talk-known-limitations)
 
 </div>
 
@@ -30,18 +30,19 @@
 Modern streaming apps are convenient, but they're sterile. Flat gray rectangles, infinite scrolling menus, and zero tactile soul.
 
 **SpotiDex** turns your Spotify session into a nostalgic desktop shrine:
-- A turntable that actually spins with your music.
-- A mechanical tonearm that lifts, drops, and returns with track changes.
-- Vinyl records you can grab and flick across the screen to skip songs.
-- Dynamic color alchemy that bathes your display in the hues of whatever album is spinning—with automated WCAG contrast correction so it never becomes an illegible neon mess.
-- An animated, deterministic 36-bar LED audio visualizer.
-- A 3D perspective queue carousel with 1-click card play.
-- Real-time karaoke lyrics synchronized to playback.
-- A dedicated Playlists & Library explorer with context playback.
-- Installable as a standalone offline-shielded Progressive Web App (PWA).
-- A transparent, zero-overhead HUD mode built specifically for OBS streamers.
+- **Turntable Physics**: A turntable that spins with your music, with a mechanical tonearm that lifts and drops with track changes.
+- **Drag-to-Skip**: Grab the spinning vinyl and fling it off-screen to skip songs with spring resistance.
+- **Dynamic Chromotherapy**: Real-time palette extraction that bathes your display in your album's hues—with automated WCAG AA contrast clamping.
+- **36-Bar Visualizer**: Deterministic, PRNG-seeded audio equalizer that gives each track its own reproducible signature rhythm.
+- **3D Depth Queue**: Cylindrical perspective carousel with direct click-to-play card selection.
+- **Karaoke Lyrics**: Real-time synced and plain lyrics powered by LRCLIB with intelligent track title normalization.
+- **Playlists Explorer**: Retro console browser for your playlists with 1-click context playback.
+- **The Dex (Artist Pokédex)**: Persistent catalog of every artist you've heard, complete with personal rarity tiers (`Legendary`, `Rare`, `Common`, `Encountered`), OG backfill, and "NEW ENTRY!" discovery celebrations.
+- **Segmented Console Ribbon**: 6 hardware-style channel presets (`[1]`–`[6]`) with active LED status pips.
+- **OBS Studio Overlay Mode**: Transparent, zero-overhead HUD mode built specifically for streamers.
+- **Offline PWA**: Standalone installable Progressive Web App with smart update protection.
 
-No servers, no hidden backends, and no proprietary lock-in. Just pure client-side React and PKCE OAuth running straight from your browser or desktop app frame.
+No servers, no hidden backends, and no proprietary lock-in. Just pure client-side React and PKCE OAuth running straight from your browser.
 
 ---
 
@@ -56,12 +57,12 @@ No servers, no hidden backends, and no proprietary lock-in. Just pure client-sid
 
 <br/><br/>
 
-### 📚 Playlists & Library Explorer
+### 📚 Playlists Explorer
+*Browse your playlists in a retro grid, inspect tracklists, and start 1-click playlist context playback.*
 
 | 🗂️ Playlists Grid | 🎵 Tracklist & Context Player |
 |:---:|:---:|
 | <img src="./Misc/Playlists1.png" alt="Playlists Grid View" width="100%" /> | <img src="./Misc/Playlists2.png" alt="Playlist Tracklist View" width="100%" /> |
-| *Browse your created and followed playlists in a retro folder grid* | *Inspect song details, durations, and start 1-click playlist context playback* |
 
 <br/>
 
@@ -86,35 +87,78 @@ No servers, no hidden backends, and no proprietary lock-in. Just pure client-sid
 
 ## ✨ What Makes SpotiDex Different?
 
+### 👾 The Dex: Pokédex-Style Artist Collection
+Transform your music listening into an artist discovery adventure:
+- **Persistent Indexed Collection**: Every artist encountered is cataloged into your personal Dex with a unique ID (`#001`, `#002`, etc.) and saved locally.
+- **OG Backfill Engine (`SYNC OG ARTISTS`)**: Pulls your Spotify Top Artists across three distinct time horizons (`long_term` $\rightarrow$ `medium_term` $\rightarrow$ `short_term`) so your all-time foundation artists are properly recognized as the earliest entries in your Dex.
+- **Live Encounter Discovery**: As music plays, any artist you haven't seen before triggers an instant, celebratory centered retro modal toast (`"NEW ENTRY! ✨"`) with sound effects and rarity tags.
+- **Personal Listening Rarity Tiers**: Rarity is calculated dynamically based on *your own* listening distribution, not Spotify's global popularity:
+  - 🌟 **Legendary** (Gold `#ffd700`): Top 5% most played artists in your Dex
+  - 💜 **Rare** (Purple `#c084fc`): Next 15%
+  - 🔷 **Common** (Cyan `#38bdf8`): Next 30%
+  - ⚪ **Encountered** (Silver `#94a3b8`): First encounters and remaining artists
+- **Artist Dossier Modal**: Click any card in The Dex to view Spotify popularity, genres, follower count, total plays, and a direct link to their Spotify profile.
+- **Filter & Search**: Search your collection by artist name or genre, or filter by rarity tier with live count metrics.
+
+---
+
+### 🎛️ Retro Console Segmented Navigation Ribbon
+No cramped tabs or wrapping buttons. SpotiDex features a dedicated hardware-inspired channel switcher:
+- **6 Discrete Channels**:
+  - `[1] PLAYER`: Turntable, Tonearm, Track Info & 36-Band Visualizer
+  - `[2] QUEUE`: 3D Perspective Cylindrical Queue Carousel
+  - `[3] HISTORY`: Persistent Local Listening Session Log
+  - `[4] LYRICS`: Real-time Synced Karaoke & Plaintext Lyrics
+  - `[5] PLAYLISTS`: Your Playlists with Full Track View & Playback
+  - `[6] THE DEX`: The Pokédex Artist Collection
+- **Active Channel LED**: Glowing retro green status LED on the active channel.
+- **Hardware Keyboard Switching**: Press number keys <kbd>1</kbd> through <kbd>6</kbd> anywhere in the app to switch channels instantly.
+
+---
+
 ### 💽 Tactile Vinyl Deck & Needle-Drop Physics
 - **Realistic Needle Dynamics**: The tonearm smoothly pivots away when playback pauses and drops into the groove when music begins. Changing tracks triggers a synchronized needle lift-and-drop animation.
 - **Drag-to-Skip Gesture Physics**: Don't just click buttons—click and drag the spinning vinyl record itself. Pull with spring resistance; fling it past the threshold to slide it off-screen and trigger an instant skip, or let go to watch it snap back.
 
+---
+
 ### 🎨 Chromotherapy: Dynamic Album Palette Extraction
 - Powered by `node-vibrant`, SpotiDex samples the dominant colors from your current album art in real-time and injects them into custom CSS properties (`--ink`, `--ink-deep`, `--accent`, `--card`).
-- **WCAG AA Contrast Safeguards**: Unlike naive color pickers that often produce unreadable text, SpotiDex calculates luminance contrast ratios on the fly. If an album produces low contrast, the engine shifts lightness and saturation until it guarantees a minimum **4.5:1 contrast ratio**.
+- **WCAG AA Contrast Safeguards**: Unlike naive color pickers that produce unreadable text, SpotiDex calculates luminance contrast ratios on the fly. If an album produces low contrast, the engine shifts lightness and saturation until it guarantees a minimum **4.5:1 contrast ratio**.
+
+---
 
 ### 📊 36-Band Deterministic Audio Visualizer
 - Spotify's Web API does not stream raw PCM audio bytes to third-party web apps. Instead of faking it with jittery random noise, SpotiDex uses a **Mulberry32 PRNG seeded by the unique Spotify Track ID**.
 - Every song generates its own distinct, reproducible 36-bar harmonic rhythm pattern across 8 discrete LED levels. When paused, the visualizer gracefully settles down to an ambient standby baseline.
 
+---
+
 ### 🎠 3D Perspective Queue Carousel (With Click-to-Play)
-- Switch over to the **PLAYING NEXT** tab to browse upcoming songs arranged in an interactive 3D cylinder powered by **GSAP**.
+- Switch over to the **QUEUE** tab to browse upcoming songs arranged in an interactive 3D cylinder powered by **GSAP**.
 - Scroll with your trackpad/mouse wheel or drag horizontally to browse. Click **any song card** to jump directly to that track—equipped with smooth hover play indicators and drag cancellation so browsing is never confused with playing.
 
-### 📚 Interactive Playlists & Library Hub
-- Explore your Spotify collection inside the retro pixel interface via the **PLAYLISTS** tab.
-- Automatically organizes your playlists into **YOUR PLAYLISTS** and **FOLLOWED PLAYLISTS**.
-- Drill into any playlist to inspect track names, artists, durations, and album thumbnails.
+---
+
+### 📚 Interactive Playlists Explorer
+- Browse your saved and created playlists in a clean retro folder grid.
+- Inspect track names, artists, durations, and album thumbnails.
 - Start full playlist context playback with **1 click** (`▶ PLAY PLAYLIST`) or jump straight to any specific track in the list.
+
+---
 
 ### 🎤 Synchronized Karaoke Lyrics
 - Live line-by-line synchronized lyrics powered by the community-maintained [LRCLIB](https://lrclib.net/) database.
+- **Smart Title Normalization**: Automatically cleans noise like `(feat. ...)`, ` - Remastered`, `(Live)`, and `[Deluxe]` to maximize search accuracy.
 - Uses a local 250ms interpolation clock so lyrics highlight and auto-scroll smoothly between Spotify's 3-second polling cycles. Gracefully falls back to unsynced plain text or instrumental tags when timestamps aren't available.
 
-### 📜 Local "Audio Dex" History Log
+---
+
+### 📜 Local Listening History
 - Spotify's recent history endpoint is notorious for 403 errors and caching issues on developer apps. SpotiDex sidesteps this by maintaining a local, persistent listening log in `localStorage` (capped at 50 tracks).
 - Relive your session history and click any past track to re-cue it instantly (automatically toggling off shuffle so your selection plays immediately).
+
+---
 
 ### 📱 Standalone Progressive Web App (PWA)
 - Install SpotiDex as a standalone app directly to your desktop or mobile home screen.
@@ -130,6 +174,12 @@ Take control without ever taking your hands off the keyboard:
 
 | Key | Action |
 |:---|:---|
+| <kbd>1</kbd> | Switch to **PLAYER** Channel |
+| <kbd>2</kbd> | Switch to **QUEUE** Channel |
+| <kbd>3</kbd> | Switch to **HISTORY** Channel |
+| <kbd>4</kbd> | Switch to **LYRICS** Channel |
+| <kbd>5</kbd> | Switch to **PLAYLISTS** Channel |
+| <kbd>6</kbd> | Switch to **THE DEX** Channel |
 | <kbd>Space</kbd> | Toggle Play / Pause |
 | <kbd>→</kbd> (Right Arrow) | Skip to Next Track |
 | <kbd>←</kbd> (Left Arrow) | Skip to Previous Track |
@@ -144,10 +194,10 @@ Take control without ever taking your hands off the keyboard:
 
 - **Core**: [React 19](https://react.dev/) + [Vite](https://vitejs.dev/) (lightning-fast HMR and minimal bundle footprint)
 - **Spotify Auth**: Client-side **OAuth 2.0 PKCE** (Proof Key for Code Exchange). Zero backend servers required. No secrets baked into frontend code.
-- **Progressive Web App**: `vite-plugin-pwa` with Workbox precaching, custom manifest, and network-only telemetry caching.
+- **PWA**: `vite-plugin-pwa` with Workbox precaching, custom manifest, and network-only telemetry caching.
 - **Animation & 3D Math**: [GSAP](https://greensock.com/gsap/) for smooth 3D stage depth rendering, drag resistance, and carousel transforms.
 - **Palette Extraction**: [`node-vibrant/browser`](https://github.com/Vibrant-Colors/node-vibrant) with custom luminance math and contrast clamping.
-- **Lyrics Engine**: [LRCLIB](https://lrclib.net/) REST API with timestamp parser and fuzzy search fallback.
+- **Lyrics Engine**: [LRCLIB](https://lrclib.net/) REST API with timestamp parser, title cleaning, and multi-tier search fallback.
 - **State & Performance**:
   - 3-second smart Spotify API poll interval with automatic token refresh on 401.
   - 250ms sub-ticker for buttery-smooth progress bar movement and lyrics sync.

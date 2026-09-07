@@ -1,0 +1,386 @@
+{
+  ".oxlintrc.json": {
+    "mtime": 1786113291.6124158,
+    "seen": 1788787799.727099,
+    "ast_hash": "5e6e3cea3e89137071c142dd7835b0ef",
+    "semantic_hash": "5e6e3cea3e89137071c142dd7835b0ef"
+  },
+  "package.json": {
+    "mtime": 1788680651.907463,
+    "seen": 1788787799.7271044,
+    "ast_hash": "be01867fa3d174595fe1b692d31c1b86",
+    "semantic_hash": "be01867fa3d174595fe1b692d31c1b86"
+  },
+  "src/App.jsx": {
+    "mtime": 1788789984.8253653,
+    "seen": 1788790167.7901554,
+    "ast_hash": "6c08edec966360c0ec27e3cafba90dee",
+    "semantic_hash": ""
+  },
+  "src/components/AudioVisualizer.jsx": {
+    "mtime": 1788613342.3506033,
+    "seen": 1788787799.727108,
+    "ast_hash": "9a1a3ec4dadea29798da2c85ec62d18a",
+    "semantic_hash": "9a1a3ec4dadea29798da2c85ec62d18a"
+  },
+  "src/components/ControlModule.jsx": {
+    "mtime": 1788635643.3760564,
+    "seen": 1788787799.7271094,
+    "ast_hash": "11a98f302a2143ce493a6cc045f1f96a",
+    "semantic_hash": "11a98f302a2143ce493a6cc045f1f96a"
+  },
+  "src/components/DepthCarousel.jsx": {
+    "mtime": 1788680999.1016233,
+    "seen": 1788787799.7271109,
+    "ast_hash": "6925cae8d588facaa9d5db500f491f56",
+    "semantic_hash": "6925cae8d588facaa9d5db500f491f56"
+  },
+  "src/components/DexPanel.jsx": {
+    "mtime": 1788706069.275349,
+    "seen": 1788787799.7271123,
+    "ast_hash": "656ab6ca4696dbff8468ee2454922c9a",
+    "semantic_hash": "656ab6ca4696dbff8468ee2454922c9a"
+  },
+  "src/components/ErrorBoundary.jsx": {
+    "mtime": 1788620280.0133817,
+    "seen": 1788787799.7271137,
+    "ast_hash": "6c8f65909114322a411ebeca666851e6",
+    "semantic_hash": "6c8f65909114322a411ebeca666851e6"
+  },
+  "src/components/LibraryPanel.jsx": {
+    "mtime": 1788791481.1790276,
+    "seen": 1788791528.4892757,
+    "ast_hash": "ac7bb428e5711515697ea9f873a5c5ee",
+    "semantic_hash": ""
+  },
+  "src/components/LyricsPanel.jsx": {
+    "mtime": 1788634296.7440119,
+    "seen": 1788787799.7271163,
+    "ast_hash": "639d8be4fa4e152e7d62ffd84ef4a461",
+    "semantic_hash": "639d8be4fa4e152e7d62ffd84ef4a461"
+  },
+  "src/components/NewEntryToast.jsx": {
+    "mtime": 1788706047.9555569,
+    "seen": 1788787799.7271175,
+    "ast_hash": "8d5b7968aa175019d09591c33d11c9a5",
+    "semantic_hash": "8d5b7968aa175019d09591c33d11c9a5"
+  },
+  "src/components/OfflineFallback.jsx": {
+    "mtime": 1788678602.5155962,
+    "seen": 1788787799.7271192,
+    "ast_hash": "59e8b30c175357a8418526842ce976c6",
+    "semantic_hash": "59e8b30c175357a8418526842ce976c6"
+  },
+  "src/components/PageFrame.jsx": {
+    "mtime": 1788680674.5404234,
+    "seen": 1788787799.7271204,
+    "ast_hash": "51819089b8c552c9c030524a76208239",
+    "semantic_hash": "51819089b8c552c9c030524a76208239"
+  },
+  "src/components/QueueCarousel.jsx": {
+    "mtime": 1788681012.806003,
+    "seen": 1788787799.7271218,
+    "ast_hash": "45535d90f7d09473adce79c5b1afae9d",
+    "semantic_hash": "45535d90f7d09473adce79c5b1afae9d"
+  },
+  "src/components/QueuePanel.jsx": {
+    "mtime": 1788615294.620708,
+    "seen": 1788787799.7271233,
+    "ast_hash": "0ee1c859a0dcb8dfe56c11d6ecc61ff7",
+    "semantic_hash": "0ee1c859a0dcb8dfe56c11d6ecc61ff7"
+  },
+  "src/components/RecentlyPlayedRail.jsx": {
+    "mtime": 1788633887.9425073,
+    "seen": 1788787799.7271245,
+    "ast_hash": "62fdda6e23c5bcf827691df45b0a575c",
+    "semantic_hash": "62fdda6e23c5bcf827691df45b0a575c"
+  },
+  "src/components/ReloadPrompt.jsx": {
+    "mtime": 1788678585.437825,
+    "seen": 1788787799.7271261,
+    "ast_hash": "17c77b9cf6ecc973c2f875866176ff1f",
+    "semantic_hash": "17c77b9cf6ecc973c2f875866176ff1f"
+  },
+  "src/components/TabBar.jsx": {
+    "mtime": 1788791901.0154743,
+    "seen": 1788792012.588333,
+    "ast_hash": "0f69b1629dbc4372f7a2fca300481ff2",
+    "semantic_hash": ""
+  },
+  "src/components/TrackInfo.jsx": {
+    "mtime": 1788615255.1814272,
+    "seen": 1788787799.7271285,
+    "ast_hash": "9a310862df541febcb262fea8b7f8f2c",
+    "semantic_hash": "9a310862df541febcb262fea8b7f8f2c"
+  },
+  "src/components/VinylCard.jsx": {
+    "mtime": 1786976526.44459,
+    "seen": 1788787799.72713,
+    "ast_hash": "2ee423a117890c57f3503e5b8d9f5932",
+    "semantic_hash": "2ee423a117890c57f3503e5b8d9f5932"
+  },
+  "src/components/VinylRecord.jsx": {
+    "mtime": 1788617677.2341728,
+    "seen": 1788787799.7271311,
+    "ast_hash": "f2fe1fc238294ad37c8eff510def9272",
+    "semantic_hash": "f2fe1fc238294ad37c8eff510def9272"
+  },
+  "src/context/AuthContext.jsx": {
+    "mtime": 1786895129.0774329,
+    "seen": 1788787799.7271323,
+    "ast_hash": "729031811d21058289185f03833e2d21",
+    "semantic_hash": "729031811d21058289185f03833e2d21"
+  },
+  "src/context/ThemeContext.jsx": {
+    "mtime": 1788618913.482032,
+    "seen": 1788787799.7271345,
+    "ast_hash": "382cf6a7d7558404d918cbd2ee476599",
+    "semantic_hash": "382cf6a7d7558404d918cbd2ee476599"
+  },
+  "src/hooks/useCurrentlyPlaying.js": {
+    "mtime": 1788613911.5976682,
+    "seen": 1788787799.7271357,
+    "ast_hash": "2d451cf5c50a583697b906d2393117c6",
+    "semantic_hash": "2d451cf5c50a583697b906d2393117c6"
+  },
+  "src/hooks/useDevices.js": {
+    "mtime": 1788619376.8827746,
+    "seen": 1788787799.727137,
+    "ast_hash": "0a00099616f4f6ead95b8e29ae3a3dec",
+    "semantic_hash": "0a00099616f4f6ead95b8e29ae3a3dec"
+  },
+  "src/hooks/useDex.js": {
+    "mtime": 1788706041.808549,
+    "seen": 1788787799.7271383,
+    "ast_hash": "04d14c3729fd7602c2e62ae4073bda9e",
+    "semantic_hash": "04d14c3729fd7602c2e62ae4073bda9e"
+  },
+  "src/hooks/useDocumentTitle.js": {
+    "mtime": 1788682848.9064076,
+    "seen": 1788787799.72714,
+    "ast_hash": "4dccea7638df136838bcadeaf825c534",
+    "semantic_hash": "4dccea7638df136838bcadeaf825c534"
+  },
+  "src/hooks/useLibrary.js": {
+    "mtime": 1788791464.2951002,
+    "seen": 1788791528.489315,
+    "ast_hash": "749eef00c7213be757b018a1759dde49",
+    "semantic_hash": ""
+  },
+  "src/hooks/useListeningHistory.js": {
+    "mtime": 1788635923.7526784,
+    "seen": 1788787799.7271423,
+    "ast_hash": "0756a6d794a9ccfb32e194ac8688fcd5",
+    "semantic_hash": "0756a6d794a9ccfb32e194ac8688fcd5"
+  },
+  "src/hooks/useLyrics.js": {
+    "mtime": 1788791280.1994312,
+    "seen": 1788791342.8774922,
+    "ast_hash": "1fdc7f54085450d6026d5f1aff2b2988",
+    "semantic_hash": ""
+  },
+  "src/hooks/useNetworkStatus.js": {
+    "mtime": 1788678589.6631806,
+    "seen": 1788787799.7271452,
+    "ast_hash": "ee71ba1ef99f4ea3103592fb1dc5e84b",
+    "semantic_hash": "ee71ba1ef99f4ea3103592fb1dc5e84b"
+  },
+  "src/hooks/useObsMode.js": {
+    "mtime": 1788616846.976221,
+    "seen": 1788787799.7271464,
+    "ast_hash": "b6d946a69f1d662bdf867431fa97e01e",
+    "semantic_hash": "b6d946a69f1d662bdf867431fa97e01e"
+  },
+  "src/hooks/usePlaybackControls.js": {
+    "mtime": 1788679727.298764,
+    "seen": 1788787799.7271478,
+    "ast_hash": "debb1c8a5407605f45da70fce8dc239d",
+    "semantic_hash": "debb1c8a5407605f45da70fce8dc239d"
+  },
+  "src/hooks/usePlaybackState.js": {
+    "mtime": 1788616547.0954056,
+    "seen": 1788787799.727149,
+    "ast_hash": "617c06e9c638c94279b7a070e5c2ba33",
+    "semantic_hash": "617c06e9c638c94279b7a070e5c2ba33"
+  },
+  "src/hooks/usePlaylistTracks.js": {
+    "mtime": 1788679740.0974405,
+    "seen": 1788787799.7271504,
+    "ast_hash": "ba31efb8bcb3d4830c376b691db77db2",
+    "semantic_hash": "ba31efb8bcb3d4830c376b691db77db2"
+  },
+  "src/hooks/useQueue.js": {
+    "mtime": 1788615574.0753565,
+    "seen": 1788787799.7271519,
+    "ast_hash": "6a4eb387e5215321e82617b7b5310f96",
+    "semantic_hash": "6a4eb387e5215321e82617b7b5310f96"
+  },
+  "src/lib/extractPalette.js": {
+    "mtime": 1788618913.4831834,
+    "seen": 1788787799.727153,
+    "ast_hash": "a35ad51e5b5b5f14d36b8df81fa05809",
+    "semantic_hash": "a35ad51e5b5b5f14d36b8df81fa05809"
+  },
+  "src/lib/lyricsApi.js": {
+    "mtime": 1788791319.2307618,
+    "seen": 1788791342.87752,
+    "ast_hash": "98b2d202df443029f8875bbb7010c5c2",
+    "semantic_hash": ""
+  },
+  "src/lib/parseLrc.js": {
+    "mtime": 1788634243.5876343,
+    "seen": 1788787799.7271557,
+    "ast_hash": "4c0ad9402bdfd5f8bdd2339477969428",
+    "semantic_hash": "4c0ad9402bdfd5f8bdd2339477969428"
+  },
+  "src/lib/pkce.js": {
+    "mtime": 1786895094.7355332,
+    "seen": 1788787799.7271569,
+    "ast_hash": "fe4a640518f962aa275067ae42bfd7b9",
+    "semantic_hash": "fe4a640518f962aa275067ae42bfd7b9"
+  },
+  "src/lib/seededRandom.js": {
+    "mtime": 1788612595.5599082,
+    "seen": 1788787799.7271583,
+    "ast_hash": "cf5480596f0921c8947c6f7cd4b4786f",
+    "semantic_hash": "cf5480596f0921c8947c6f7cd4b4786f"
+  },
+  "src/lib/spotifyApi.js": {
+    "mtime": 1788791206.1117961,
+    "seen": 1788791342.8775327,
+    "ast_hash": "e6959d83a2ae67fb7ba1ca2c290cc2ea",
+    "semantic_hash": ""
+  },
+  "src/lib/spotifyAuth.js": {
+    "mtime": 1788706461.9257605,
+    "seen": 1788787799.7271612,
+    "ast_hash": "f528a299185d14fc7a6de0aea477522b",
+    "semantic_hash": "f528a299185d14fc7a6de0aea477522b"
+  },
+  "src/main.jsx": {
+    "mtime": 1788680169.0337608,
+    "seen": 1788787799.7271628,
+    "ast_hash": "44d6f9f35ac448d1f72927c61007c1d0",
+    "semantic_hash": "44d6f9f35ac448d1f72927c61007c1d0"
+  },
+  "src/pages/Callback.jsx": {
+    "mtime": 1786895141.3295317,
+    "seen": 1788787799.7271643,
+    "ast_hash": "2c0eacfe2e04dd033aba758035d2eb83",
+    "semantic_hash": "2c0eacfe2e04dd033aba758035d2eb83"
+  },
+  "vite.config.js": {
+    "mtime": 1788678188.5061963,
+    "seen": 1788787799.7271655,
+    "ast_hash": "9d718dda084e440fee59e2bcfde3a0bb",
+    "semantic_hash": "9d718dda084e440fee59e2bcfde3a0bb"
+  },
+  "README.md": {
+    "mtime": 1788682191.627879,
+    "seen": 1788787799.727167,
+    "ast_hash": "16994de6cb6fdbd332d2580d8c6eb499",
+    "semantic_hash": "16994de6cb6fdbd332d2580d8c6eb499"
+  },
+  "index.html": {
+    "mtime": 1788678197.116583,
+    "seen": 1788787799.7271683,
+    "ast_hash": "b49d666a33eb5c4c6ca74fd81e5139df",
+    "semantic_hash": "b49d666a33eb5c4c6ca74fd81e5139df"
+  },
+  "Misc/Lyrics.png": {
+    "mtime": 1788637108.6780815,
+    "seen": 1788787799.7271698,
+    "ast_hash": "6a48ad732c2e03d45303063ad2cec6fb",
+    "semantic_hash": "6a48ad732c2e03d45303063ad2cec6fb"
+  },
+  "Misc/NowPlaying.png": {
+    "mtime": 1788637008.3302524,
+    "seen": 1788787799.7271712,
+    "ast_hash": "6c26491e931bb67593caed28d8fbda79",
+    "semantic_hash": "6c26491e931bb67593caed28d8fbda79"
+  },
+  "Misc/PlayingNext.png": {
+    "mtime": 1788637052.2942274,
+    "seen": 1788787799.7271721,
+    "ast_hash": "eb99e67e38d32fd956c00001077a0f46",
+    "semantic_hash": "eb99e67e38d32fd956c00001077a0f46"
+  },
+  "Misc/Playlists1.png": {
+    "mtime": 1788681990.9936776,
+    "seen": 1788787799.7271733,
+    "ast_hash": "aca9e6247b4ca87a5832886e0e542394",
+    "semantic_hash": "aca9e6247b4ca87a5832886e0e542394"
+  },
+  "Misc/Playlists2.png": {
+    "mtime": 1788682010.9586706,
+    "seen": 1788787799.727175,
+    "ast_hash": "8a236f446e4bb2190d4ae381ab400ea5",
+    "semantic_hash": "8a236f446e4bb2190d4ae381ab400ea5"
+  },
+  "Misc/RecentlyPlayed.png": {
+    "mtime": 1788637722.423235,
+    "seen": 1788787799.7271762,
+    "ast_hash": "c1b230852a7c7e62183e07de15d331d1",
+    "semantic_hash": "c1b230852a7c7e62183e07de15d331d1"
+  },
+  "src/assets/hero.png": {
+    "mtime": 1786113291.7005959,
+    "seen": 1788787799.7271774,
+    "ast_hash": "aead493361b27e7510691c5d7072dfc1",
+    "semantic_hash": "aead493361b27e7510691c5d7072dfc1"
+  },
+  "graphify-out/memory/query_20260907_133458_b0ffc60b_trace_the_complete_authentication_flow__spotify_lo.md": {
+    "mtime": 1788788098.924297,
+    "seen": 1788790167.790268,
+    "ast_hash": "de0bf88ad2cb6756fe04f0485eac69a7",
+    "semantic_hash": ""
+  },
+  "graphify-out/memory/query_20260907_133925_d4f96083_create_a_spotify_playlist_from_current_queue.md": {
+    "mtime": 1788788365.5793219,
+    "seen": 1788790167.7902694,
+    "ast_hash": "c21335a19f5229d5623a1a4662e055fc",
+    "semantic_hash": ""
+  },
+  "public/favicon.svg": {
+    "mtime": 1788617374.4703631,
+    "seen": 1788790167.7902844,
+    "ast_hash": "1e845edf828173009f67680f986f1321",
+    "semantic_hash": ""
+  },
+  "public/icons.svg": {
+    "mtime": 1786113291.7660656,
+    "seen": 1788790167.790286,
+    "ast_hash": "3b4fcfcf393eca4d264dca4a4663bc37",
+    "semantic_hash": ""
+  },
+  "public/pwa-192x192.svg": {
+    "mtime": 1788678170.6087825,
+    "seen": 1788790167.7902877,
+    "ast_hash": "59f95baf63d92d5acd6cf0abab89e116",
+    "semantic_hash": ""
+  },
+  "public/pwa-512x512.svg": {
+    "mtime": 1788678176.2166312,
+    "seen": 1788790167.790289,
+    "ast_hash": "c8a2122808b7e2b2ec2bf01268f9a529",
+    "semantic_hash": ""
+  },
+  "public/pwa-maskable-512x512.svg": {
+    "mtime": 1788678182.394554,
+    "seen": 1788790167.7902904,
+    "ast_hash": "c122e3ab0a763c90048527eb4bf214b2",
+    "semantic_hash": ""
+  },
+  "src/assets/react.svg": {
+    "mtime": 1786113291.787441,
+    "seen": 1788790167.7902935,
+    "ast_hash": "f0402b67b6ce880f65666bb49e841696",
+    "semantic_hash": ""
+  },
+  "src/assets/vite.svg": {
+    "mtime": 1786113291.803236,
+    "seen": 1788790167.7902951,
+    "ast_hash": "9960a24288958394ac50e57ff638b036",
+    "semantic_hash": ""
+  }
+}

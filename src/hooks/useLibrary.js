@@ -1,14 +1,14 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { useAuth } from '../context/AuthContext';
-import { getCurrentUserId, getUserPlaylists } from '../lib/spotifyApi';
+import { getUserPlaylists } from '../lib/spotifyApi';
 
 /**
- * Hook to fetch user playlists and partition them into owned vs followed/made-for-you.
+ * Hook to fetch the user's playlists.
  *
  * @param {{ enabled?: boolean }} [options]
  * @returns {{
+ *   playlists: Array<object>,
  *   ownedPlaylists: Array<object>,
- *   followedPlaylists: Array<object>,
  *   isLoading: boolean,
  *   error: Error|null,
  *   refetchLibrary: () => Promise<void>
@@ -16,12 +16,10 @@ import { getCurrentUserId, getUserPlaylists } from '../lib/spotifyApi';
  */
 export function useLibrary({ enabled = true } = {}) {
   const { accessToken } = useAuth();
-  const [ownedPlaylists, setOwnedPlaylists] = useState([]);
-  const [followedPlaylists, setFollowedPlaylists] = useState([]);
+  const [playlists, setPlaylists] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const userIdRef = useRef(null);
   const hasFetchedRef = useRef(false);
 
   const fetchLibrary = useCallback(async () => {
@@ -31,23 +29,16 @@ export function useLibrary({ enabled = true } = {}) {
     setError(null);
 
     try {
-      if (!userIdRef.current) {
-        userIdRef.current = await getCurrentUserId(accessToken);
-      }
-
       const rawItems = await getUserPlaylists(accessToken);
-      const currentId = userIdRef.current;
-
-      const owned = [];
-      const followed = [];
+      const items = [];
 
       for (const pl of rawItems) {
         if (!pl) continue;
-        const isOwner = pl.owner && pl.owner.id === currentId;
+
         const images = pl.images || [];
         const image = images[0]?.url || '';
 
-        const item = {
+        items.push({
           id: pl.id,
           uri: pl.uri,
           name: pl.name || 'Untitled Playlist',
@@ -55,18 +46,10 @@ export function useLibrary({ enabled = true } = {}) {
           tracksCount: pl.items?.total ?? pl.tracks?.total ?? 0,
           image,
           ownerName: pl.owner?.display_name || pl.owner?.id || 'Spotify',
-          isOwner,
-        };
-
-        if (isOwner) {
-          owned.push(item);
-        } else {
-          followed.push(item);
-        }
+        });
       }
 
-      setOwnedPlaylists(owned);
-      setFollowedPlaylists(followed);
+      setPlaylists(items);
       hasFetchedRef.current = true;
     } catch (err) {
       console.error('[useLibrary] Error fetching playlists:', err);
@@ -83,8 +66,8 @@ export function useLibrary({ enabled = true } = {}) {
   }, [enabled, fetchLibrary]);
 
   return {
-    ownedPlaylists,
-    followedPlaylists,
+    playlists,
+    ownedPlaylists: playlists, // backward-compatibility
     isLoading,
     error,
     refetchLibrary: fetchLibrary,

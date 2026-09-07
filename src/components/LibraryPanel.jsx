@@ -22,7 +22,12 @@ function formatDuration(ms) {
  * }} props
  */
 export default function LibraryPanel({ onPlayPlaylist }) {
-  const { ownedPlaylists, followedPlaylists, isLoading, error } = useLibrary({ enabled: true });
+  const {
+    playlists,
+    isLoading,
+    error,
+    refetchLibrary,
+  } = useLibrary({ enabled: true });
   const [selectedPlaylist, setSelectedPlaylist] = useState(null);
 
   const {
@@ -42,11 +47,19 @@ export default function LibraryPanel({ onPlayPlaylist }) {
       <div className="library-panel__header">
         <div className="library-panel__title-group">
           <span className="library-panel__led" />
-          <h2 className="library-panel__title">LIBRARY</h2>
+          <h2 className="library-panel__title">PLAYLISTS</h2>
         </div>
-        <span className="library-panel__tag">
-          {selectedPlaylist ? 'PLAYLIST TRACKS' : 'SPOTIFY PLAYLISTS'}
-        </span>
+        <div className="library-panel__actions">
+          <button
+            type="button"
+            className="library-panel__refresh-btn"
+            onClick={() => refetchLibrary()}
+            disabled={isLoading}
+            title="Scan Spotify for new or recently added playlists"
+          >
+            {isLoading ? 'SCANNING…' : '↻ REFRESH'}
+          </button>
+        </div>
       </div>
 
       {/* Error display */}
@@ -146,104 +159,51 @@ export default function LibraryPanel({ onPlayPlaylist }) {
         ) : (
           /* Grid View Mode */
           <>
-            {isLoading && ownedPlaylists.length === 0 && followedPlaylists.length === 0 ? (
+            {isLoading && playlists.length === 0 ? (
               <div className="library-status">
                 <p>Scanning Spotify playlists…</p>
               </div>
+            ) : playlists.length === 0 ? (
+              <p className="library-empty">No playlists found.</p>
             ) : (
-              <>
-                {/* Section 1: Your Playlists */}
-                <div className="library-section">
-                  <h3 className="library-section__title">YOUR PLAYLISTS</h3>
-                  {ownedPlaylists.length === 0 ? (
-                    <p className="library-empty">No owned playlists found.</p>
-                  ) : (
-                    <div className="library-grid">
-                      {ownedPlaylists.map((pl) => (
-                        <div
-                          key={pl.id}
-                          className="playlist-card"
-                          role="button"
-                          tabIndex={0}
-                          onClick={() => setSelectedPlaylist(pl)}
-                          onKeyDown={(e) => {
-                            if (e.key === 'Enter' || e.key === ' ') {
-                              e.preventDefault();
-                              setSelectedPlaylist(pl);
-                            }
-                          }}
-                        >
-                          <div className="playlist-card__thumb-wrap">
-                            {pl.image ? (
-                              <img
-                                src={pl.image}
-                                alt={pl.name}
-                                className="playlist-card__img"
-                                loading="lazy"
-                              />
-                            ) : (
-                              <div className="playlist-card__placeholder" />
-                            )}
-                          </div>
-                          <div className="playlist-card__meta">
-                            <span className="playlist-card__name" title={pl.name}>
-                              {pl.name}
-                            </span>
-                            <span className="playlist-card__count">
-                              {pl.tracksCount} tracks
-                            </span>
-                          </div>
-                        </div>
-                      ))}
+              <div className="library-grid">
+                {playlists.map((pl) => (
+                  <div
+                    key={pl.id}
+                    className="playlist-card"
+                    role="button"
+                    tabIndex={0}
+                    onClick={() => setSelectedPlaylist(pl)}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        setSelectedPlaylist(pl);
+                      }
+                    }}
+                  >
+                    <div className="playlist-card__thumb-wrap">
+                      {pl.image ? (
+                        <img
+                          src={pl.image}
+                          alt={pl.name}
+                          className="playlist-card__img"
+                          loading="lazy"
+                        />
+                      ) : (
+                        <div className="playlist-card__placeholder" />
+                      )}
                     </div>
-                  )}
-                </div>
-
-                {/* Section 2: Made For You / Followed */}
-                {followedPlaylists.length > 0 && (
-                  <div className="library-section">
-                    <h3 className="library-section__title">MADE FOR YOU &amp; FOLLOWED</h3>
-                    <div className="library-grid">
-                      {followedPlaylists.map((pl) => (
-                        <div
-                          key={pl.id}
-                          className="playlist-card"
-                          role="button"
-                          tabIndex={0}
-                          onClick={() => setSelectedPlaylist(pl)}
-                          onKeyDown={(e) => {
-                            if (e.key === 'Enter' || e.key === ' ') {
-                              e.preventDefault();
-                              setSelectedPlaylist(pl);
-                            }
-                          }}
-                        >
-                          <div className="playlist-card__thumb-wrap">
-                            {pl.image ? (
-                              <img
-                                src={pl.image}
-                                alt={pl.name}
-                                className="playlist-card__img"
-                                loading="lazy"
-                              />
-                            ) : (
-                              <div className="playlist-card__placeholder" />
-                            )}
-                          </div>
-                          <div className="playlist-card__meta">
-                            <span className="playlist-card__name" title={pl.name}>
-                              {pl.name}
-                            </span>
-                            <span className="playlist-card__count">
-                              {pl.tracksCount} tracks
-                            </span>
-                          </div>
-                        </div>
-                      ))}
+                    <div className="playlist-card__meta">
+                      <span className="playlist-card__name" title={pl.name}>
+                        {pl.name}
+                      </span>
+                      <span className="playlist-card__count">
+                        {pl.tracksCount} tracks
+                      </span>
                     </div>
                   </div>
-                )}
-              </>
+                ))}
+              </div>
             )}
           </>
         )}

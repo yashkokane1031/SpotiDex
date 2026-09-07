@@ -21,6 +21,9 @@ import QueueCarousel from './components/QueueCarousel';
 import RecentlyPlayedRail from './components/RecentlyPlayedRail';
 import LyricsPanel from './components/LyricsPanel';
 import LibraryPanel from './components/LibraryPanel';
+import DexPanel from './components/DexPanel';
+import NewEntryToast from './components/NewEntryToast';
+import { useDex } from './hooks/useDex';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { useNetworkStatus } from './hooks/useNetworkStatus';
 import OfflineFallback from './components/OfflineFallback';
@@ -68,6 +71,8 @@ function App() {
 }
 
 function NowPlayingView({ onLogout, isObsMode = false, showControls = true }) {
+  const { accessToken } = useAuth();
+
   // Remembered tab persisted in localStorage
   const [activeTab, setActiveTab] = useState(() => {
     try {
@@ -138,6 +143,21 @@ function NowPlayingView({ onLogout, isObsMode = false, showControls = true }) {
 
   const { history } = useListeningHistory({ track });
 
+  // Persistent Pokédex artist collection ("The Dex")
+  const {
+    dex,
+    isSyncing: dexSyncing,
+    syncStatus: dexSyncStatus,
+    syncError: dexSyncError,
+    syncTopArtists,
+    currentToast,
+    dismissCurrentToast,
+  } = useDex({
+    accessToken,
+    track,
+    isPlaying,
+  });
+
   const {
     lyricsState,
     syncedLines,
@@ -164,13 +184,40 @@ function NowPlayingView({ onLogout, isObsMode = false, showControls = true }) {
     controlsRef.current = controls;
   });
 
+  const selectTabRef = useRef(handleSelectTab);
+  useEffect(() => {
+    selectTabRef.current = handleSelectTab;
+  });
+
   const volumeRef = useRef(70);
 
-  // Global keyboard shortcuts (Space, ArrowLeft/Right, ArrowUp/Down)
+  // Global keyboard shortcuts (Space, ArrowLeft/Right, ArrowUp/Down, 1-6 Channel Presets)
   useEffect(() => {
     const handleKeyDown = (e) => {
       // Ignore when focused inside an input/textarea
       if (['INPUT', 'TEXTAREA'].includes(document.activeElement?.tagName)) {
+        return;
+      }
+
+      // 1-6 Channel preset switching
+      const TAB_KEY_MAP = {
+        Digit1: 'now-playing',
+        Digit2: 'playing-next',
+        Digit3: 'recently-played',
+        Digit4: 'lyrics',
+        Digit5: 'library',
+        Digit6: 'dex',
+        Numpad1: 'now-playing',
+        Numpad2: 'playing-next',
+        Numpad3: 'recently-played',
+        Numpad4: 'lyrics',
+        Numpad5: 'library',
+        Numpad6: 'dex',
+      };
+
+      if (TAB_KEY_MAP[e.code]) {
+        e.preventDefault();
+        selectTabRef.current(TAB_KEY_MAP[e.code]);
         return;
       }
 
@@ -212,6 +259,9 @@ function NowPlayingView({ onLogout, isObsMode = false, showControls = true }) {
 
   return (
     <ThemeProvider albumArtUrl={albumArtUrl}>
+      {/* Centered celebration popup for live discoveries across all tabs */}
+      <NewEntryToast entry={currentToast} onDismiss={dismissCurrentToast} />
+
       <PageFrame isObsMode={isObsMode}>
         {/* Tab Bar (hidden in OBS mode) */}
         {!isObsMode && (
@@ -302,9 +352,20 @@ function NowPlayingView({ onLogout, isObsMode = false, showControls = true }) {
                 />
               )}
 
-              {/* Tab 5: Library (LibraryPanel) */}
+              {/* Tab 5: Playlists (LibraryPanel) */}
               {activeTab === 'library' && (
                 <LibraryPanel onPlayPlaylist={controls.playPlaylist} />
+              )}
+
+              {/* Tab 6: The Dex (DexPanel) */}
+              {activeTab === 'dex' && (
+                <DexPanel
+                  dex={dex}
+                  isSyncing={dexSyncing}
+                  syncStatus={dexSyncStatus}
+                  syncError={dexSyncError}
+                  onSyncTopArtists={syncTopArtists}
+                />
               )}
             </>
           )}

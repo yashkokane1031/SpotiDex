@@ -1,66 +1,144 @@
-/* === TabBar — Gapped Retro Folder Tabs === */
+/* === Retro Console Segmented Nav Ribbon === */
 
-.tab-bar {
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  gap: 8px;
-  max-width: 760px;
+.console-nav {
   width: 100%;
-  margin-bottom: 0.75rem;
+  max-width: 720px;
+  margin-bottom: 0.85rem;
   position: relative;
   z-index: 5;
-  flex-wrap: wrap;
 }
 
-.tab-btn {
-  font-family: 'Press Start 2P', cursive;
-  font-size: 10px;
-  line-height: 1;
-  padding: 10px 14px;
+.console-nav__frame {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  width: 100%;
+  background: var(--card);
+  border: 3px solid var(--ink);
+  box-shadow: 4px 4px 0px var(--ink-deep);
+  border-radius: 0;
+  overflow: hidden;
+}
+
+.console-nav__segment {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 8px 4px 7px;
   background: var(--card);
   color: var(--ink);
-  border: 3px solid var(--ink);
-  border-radius: 0;
+  border: none;
+  border-right: 2px solid var(--ink);
   cursor: pointer;
-  letter-spacing: 0.05em;
   position: relative;
-  transition: background 0.15s, color 0.15s;
-  box-shadow: none;
+  transition: background 0.12s, color 0.12s;
+  outline: none;
+  user-select: none;
 }
 
-/* Inactive hover */
-.tab-btn:hover:not(.is-active) {
+.console-nav__segment:last-child {
+  border-right: none;
+}
+
+/* Inactive Hover */
+.console-nav__segment:hover:not(.is-active) {
   background: color-mix(in srgb, var(--accent) 15%, var(--card));
 }
 
-/* Active tab */
-.tab-btn.is-active {
-  background: var(--accent);
+/* Active Segment */
+.console-nav__segment.is-active {
+  background: var(--ink);
   color: var(--card);
-  border-color: var(--ink);
-  z-index: 6;
 }
 
+/* Top Row: LED Indicator + Number Pip */
+.console-nav__top-row {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  line-height: 1;
+}
+
+.console-nav__led {
+  width: 6px;
+  height: 6px;
+  border-radius: 0;
+  background: rgba(0, 0, 0, 0.2);
+  display: inline-block;
+  transition: background 0.15s, box-shadow 0.15s;
+}
+
+.console-nav__led.is-lit {
+  background: var(--accent);
+  box-shadow: 0 0 6px var(--accent);
+}
+
+.console-nav__num {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 7px;
+  opacity: 0.45;
+  line-height: 1;
+}
+
+.console-nav__segment.is-active .console-nav__num {
+  color: var(--accent);
+  opacity: 1;
+}
+
+/* Label */
+.console-nav__label {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 8px;
+  line-height: 1;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+.console-nav__label-short {
+  display: none;
+}
+
+/* Responsive: < 680px */
 @media (max-width: 680px) {
-  .tab-bar {
-    gap: 6px;
-  }
-
-  .tab-btn {
-    font-size: 8px;
-    padding: 8px 10px;
-    letter-spacing: 0.02em;
-  }
-}
-
-@media (max-width: 460px) {
-  .tab-bar {
+  .console-nav__segment {
+    padding: 7px 2px 6px;
     gap: 4px;
   }
 
-  .tab-btn {
+  .console-nav__label-full {
+    display: none;
+  }
+
+  .console-nav__label-short {
+    display: inline;
+  }
+
+  .console-nav__label {
     font-size: 7px;
-    padding: 6px 7px;
+    letter-spacing: 0;
+  }
+
+  .console-nav__num {
+    font-size: 6px;
+  }
+
+  .console-nav__led {
+    width: 5px;
+    height: 5px;
+  }
+}
+
+/* Responsive: < 420px */
+@media (max-width: 420px) {
+  .console-nav__top-row {
+    gap: 3px;
+  }
+
+  .console-nav__label {
+    font-size: 6px;
   }
 }

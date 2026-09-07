@@ -1,72 +1,53 @@
 import './TabBar.css';
 
+const TABS = [
+  { id: 'now-playing', num: '1', label: 'PLAYER', shortLabel: 'PLAY', aria: 'Now Playing' },
+  { id: 'playing-next', num: '2', label: 'QUEUE', shortLabel: 'QUEUE', aria: 'Playing Next Queue' },
+  { id: 'recently-played', num: '3', label: 'HISTORY', shortLabel: 'HIST', aria: 'Recently Played History' },
+  { id: 'lyrics', num: '4', label: 'LYRICS', shortLabel: 'LYRIC', aria: 'Song Lyrics' },
+  { id: 'library', num: '5', label: 'PLAYLISTS', shortLabel: 'LISTS', aria: 'Playlists Library' },
+  { id: 'dex', num: '6', label: 'THE DEX', shortLabel: 'DEX', aria: 'Artist Dex Collection' },
+];
+
 /**
- * Gapped pixel-styled folder tabs for switching between
- * "NOW PLAYING", "PLAYING NEXT", "RECENTLY PLAYED", "LYRICS", and "PLAYLISTS" views.
+ * Retro Console Segmented Bar — unified edge-to-edge hardware ribbon
+ * with active LED pips, 1-6 number badges, and tactile active states.
  *
  * @param {{
- *   activeTab: 'now-playing' | 'playing-next' | 'recently-played' | 'lyrics' | 'library',
- *   onSelectTab: (tab: 'now-playing' | 'playing-next' | 'recently-played' | 'lyrics' | 'library') => void
+ *   activeTab: 'now-playing' | 'playing-next' | 'recently-played' | 'lyrics' | 'library' | 'dex',
+ *   onSelectTab: (tab: 'now-playing' | 'playing-next' | 'recently-played' | 'lyrics' | 'library' | 'dex') => void
  * }} props
  */
 export default function TabBar({ activeTab, onSelectTab }) {
   return (
-    <nav className="tab-bar" role="tablist" aria-label="Player view modes">
-      <button
-        type="button"
-        role="tab"
-        id="tab-now-playing"
-        aria-selected={activeTab === 'now-playing'}
-        aria-controls="panel-now-playing"
-        className={`tab-btn${activeTab === 'now-playing' ? ' is-active' : ''}`}
-        onClick={() => onSelectTab('now-playing')}
-      >
-        NOW PLAYING
-      </button>
-      <button
-        type="button"
-        role="tab"
-        id="tab-playing-next"
-        aria-selected={activeTab === 'playing-next'}
-        aria-controls="panel-playing-next"
-        className={`tab-btn${activeTab === 'playing-next' ? ' is-active' : ''}`}
-        onClick={() => onSelectTab('playing-next')}
-      >
-        PLAYING NEXT
-      </button>
-      <button
-        type="button"
-        role="tab"
-        id="tab-recently-played"
-        aria-selected={activeTab === 'recently-played'}
-        aria-controls="panel-recently-played"
-        className={`tab-btn${activeTab === 'recently-played' ? ' is-active' : ''}`}
-        onClick={() => onSelectTab('recently-played')}
-      >
-        RECENTLY PLAYED
-      </button>
-      <button
-        type="button"
-        role="tab"
-        id="tab-lyrics"
-        aria-selected={activeTab === 'lyrics'}
-        aria-controls="panel-lyrics"
-        className={`tab-btn${activeTab === 'lyrics' ? ' is-active' : ''}`}
-        onClick={() => onSelectTab('lyrics')}
-      >
-        LYRICS
-      </button>
-      <button
-        type="button"
-        role="tab"
-        id="tab-library"
-        aria-selected={activeTab === 'library'}
-        aria-controls="panel-library"
-        className={`tab-btn${activeTab === 'library' ? ' is-active' : ''}`}
-        onClick={() => onSelectTab('library')}
-      >
-        PLAYLISTS
-      </button>
+    <nav className="console-nav" role="tablist" aria-label="Player console modes">
+      <div className="console-nav__frame">
+        {TABS.map((tab) => {
+          const isActive = activeTab === tab.id;
+          return (
+            <button
+              key={tab.id}
+              type="button"
+              role="tab"
+              id={`tab-${tab.id}`}
+              aria-selected={isActive}
+              aria-controls={`panel-${tab.id}`}
+              className={`console-nav__segment${isActive ? ' is-active' : ''}`}
+              onClick={() => onSelectTab(tab.id)}
+              title={`${tab.label} (Press ${tab.num})`}
+            >
+              <div className="console-nav__top-row">
+                <span className={`console-nav__led${isActive ? ' is-lit' : ''}`} />
+                <span className="console-nav__num">{tab.num}</span>
+              </div>
+              <span className="console-nav__label">
+                <span className="console-nav__label-full">{tab.label}</span>
+                <span className="console-nav__label-short">{tab.shortLabel}</span>
+              </span>
+            </button>
+          );
+        })}
+      </div>
     </nav>
   );
 }

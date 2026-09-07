@@ -69,8 +69,10 @@ export function useLyrics({ trackId, trackName, artistName, albumName, durationM
       state = 'not-found';
     }
 
-    // Store in cache
-    cacheRef.current.set(id, { syncedLines: synced, plainText: plain, state });
+    // Store in cache only if lyrics or instrumental were found
+    if (result) {
+      cacheRef.current.set(id, { syncedLines: synced, plainText: plain, state });
+    }
 
     // Only apply if this is still the current track (avoid stale writes)
     if (lastFetchedIdRef.current === id) {

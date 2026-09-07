@@ -58,6 +58,34 @@
   opacity: 0.6;
 }
 
+.library-panel__refresh-btn {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 8px;
+  padding: 6px 12px;
+  background: var(--card);
+  color: var(--ink);
+  border: 2px solid var(--ink);
+  box-shadow: 2px 2px 0px var(--ink-deep);
+  cursor: pointer;
+  letter-spacing: 0.5px;
+  transition: background 0.15s, color 0.15s, transform 0.1s;
+}
+
+.library-panel__refresh-btn:hover:not(:disabled) {
+  background: var(--accent);
+  color: var(--card);
+}
+
+.library-panel__refresh-btn:active:not(:disabled) {
+  transform: translate(1px, 1px);
+  box-shadow: 1px 1px 0px var(--ink-deep);
+}
+
+.library-panel__refresh-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 .library-panel__body {
   padding: 18px;
   max-height: 520px;

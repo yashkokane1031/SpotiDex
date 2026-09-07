@@ -47,6 +47,7 @@ export async function getCurrentlyPlaying(accessToken) {
     uri: data.item.uri,
     name: data.item.name,
     artists: data.item.artists.map((a) => a.name).join(', '),
+    artistList: (data.item.artists || []).map((a) => ({ id: a.id, name: a.name })),
     album: {
       name: data.item.album.name,
       images: data.item.album.images, // full array — Phase 3 picks sizes
@@ -331,28 +332,39 @@ export async function getCurrentUserId(accessToken) {
  * @returns {Promise<Array<object>>}
  */
 export async function getUserPlaylists(accessToken) {
-  const response = await fetch(`${BASE_URL}/me/playlists?limit=50`, {
-    headers: { Authorization: `Bearer ${accessToken}` },
-  });
+  let allItems = [];
+  let nextUrl = `${BASE_URL}/me/playlists?limit=50`;
 
-  if (response.status === 204) {
-    return [];
+  while (nextUrl && allItems.length < 200) {
+    const response = await fetch(nextUrl, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+
+    if (response.status === 204) {
+      break;
+    }
+
+    if (response.status === 401) {
+      const error = new Error('Access token expired');
+      error.status = 401;
+      throw error;
+    }
+
+    if (!response.ok) {
+      const error = new Error(`Spotify API error: ${response.status}`);
+      error.status = response.status;
+      throw error;
+    }
+
+    const data = await response.json();
+    const items = data.items || [];
+    allItems = allItems.concat(items);
+    nextUrl = data.next || null;
   }
 
-  if (response.status === 401) {
-    const error = new Error('Access token expired');
-    error.status = 401;
-    throw error;
-  }
-
-  if (!response.ok) {
-    const error = new Error(`Spotify API error: ${response.status}`);
-    error.status = response.status;
-    throw error;
-  }
-
-  const data = await response.json();
-  return data.items || [];
+  return allItems;
 }
 
 /**
@@ -441,5 +453,72 @@ export async function getPlaylistTracks(accessToken, playlistId) {
         durationMs: t.duration_ms || 0,
       };
     });
+}
+
+// ---------------------------------------------------------------------------
+// The Dex & Artist Data
+// ---------------------------------------------------------------------------
+
+/**
+ * Fetch user's top artists for a given time range.
+ *
+ * @param {string} accessToken
+ * @param {'short_term'|'medium_term'|'long_term'} timeRange
+ * @returns {Promise<Array<{ id: string, name: string, images: Array<{ url: string }>, genres: string[], popularity: number, uri: string, external_urls: object }>>}
+ */
+export async function getTopArtists(accessToken, timeRange = 'medium_term') {
+  const response = await fetch(`${BASE_URL}/me/top/artists?time_range=${timeRange}&limit=50`, {
+    headers: { Authorization: `Bearer ${accessToken}` },
+  });
+
+  if (response.status === 204) {
+    return [];
+  }
+
+  if (response.status === 401) {
+    const error = new Error('Access token expired');
+    error.status = 401;
+    throw error;
+  }
+
+  if (!response.ok) {
+    const error = new Error(`Spotify API error: ${response.status}`);
+    error.status = response.status;
+    throw error;
+  }
+
+  const data = await response.json();
+  return data.items || [];
+}
+
+/**
+ * Fetch up to 50 artists by ID in a single batch request.
+ *
+ * @param {string} accessToken
+ * @param {string[]} artistIds
+ * @returns {Promise<Array<{ id: string, name: string, images: Array<{ url: string }>, genres: string[], popularity: number, uri: string, external_urls: object }>>}
+ */
+export async function getArtistsBatch(accessToken, artistIds) {
+  if (!artistIds || artistIds.length === 0) return [];
+  const validIds = artistIds.filter(Boolean).slice(0, 50);
+  if (validIds.length === 0) return [];
+
+  const idsParam = encodeURIComponent(validIds.join(','));
+  const response = await fetch(`${BASE_URL}/artists?ids=${idsParam}`, {
+    headers: { Authorization: `Bearer ${accessToken}` },
+  });
+
+  if (response.status === 401) {
+    const error = new Error('Access token expired');
+    error.status = 401;
+    throw error;
+  }
+
+  if (!response.ok) {
+    return [];
+  }
+
+  const data = await response.json();
+  return data.artists || [];
 }
 
