@@ -48,9 +48,9 @@
     "semantic_hash": "6c8f65909114322a411ebeca666851e6"
   },
   "src/components/LibraryPanel.jsx": {
-    "mtime": 1788790468.2137113,
-    "seen": 1788790628.5484836,
-    "ast_hash": "e1b49bf3b06f95dd39f858b6a95146d3",
+    "mtime": 1788791481.1790276,
+    "seen": 1788791528.4892757,
+    "ast_hash": "ac7bb428e5711515697ea9f873a5c5ee",
     "semantic_hash": ""
   },
   "src/components/LyricsPanel.jsx": {
@@ -102,8 +102,8 @@
     "semantic_hash": "17c77b9cf6ecc973c2f875866176ff1f"
   },
   "src/components/TabBar.jsx": {
-    "mtime": 1788789969.0866764,
-    "seen": 1788790167.7902098,
+    "mtime": 1788791901.0154743,
+    "seen": 1788792012.588333,
     "ast_hash": "0f69b1629dbc4372f7a2fca300481ff2",
     "semantic_hash": ""
   },
@@ -162,9 +162,9 @@
     "semantic_hash": "4dccea7638df136838bcadeaf825c534"
   },
   "src/hooks/useLibrary.js": {
-    "mtime": 1788790800.856991,
-    "seen": 1788790881.8669605,
-    "ast_hash": "c27b435fa2a052fb7edbb5d51ebdfcfc",
+    "mtime": 1788791464.2951002,
+    "seen": 1788791528.489315,
+    "ast_hash": "749eef00c7213be757b018a1759dde49",
     "semantic_hash": ""
   },
   "src/hooks/useListeningHistory.js": {

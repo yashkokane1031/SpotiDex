@@ -455,6 +455,30 @@
       "source_location": "L73"
     },
     {
+      "id": "src_components_librarypanel_formatduration",
+      "label": "formatDuration()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "react",
+      "file_type": "code",
+      "norm_label": "formatduration()",
+      "source_file": "src/components/LibraryPanel.jsx",
+      "source_location": "L9"
+    },
+    {
+      "id": "src_components_librarypanel_librarypanel",
+      "label": "LibraryPanel()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "react",
+      "file_type": "code",
+      "norm_label": "librarypanel()",
+      "source_file": "src/components/LibraryPanel.jsx",
+      "source_location": "L24"
+    },
+    {
       "id": "src_context_authcontext_authprovider",
       "label": "AuthProvider()",
       "_callable": true,
@@ -515,18 +539,6 @@
       "source_location": "L161"
     },
     {
-      "id": "src_hooks_usedevices_usedevices",
-      "label": "useDevices()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "react",
-      "file_type": "code",
-      "norm_label": "usedevices()",
-      "source_file": "src/hooks/useDevices.js",
-      "source_location": "L15"
-    },
-    {
       "id": "src_hooks_usedocumenttitle_usedocumenttitle",
       "label": "useDocumentTitle()",
       "_callable": true,
@@ -537,6 +549,18 @@
       "norm_label": "usedocumenttitle()",
       "source_file": "src/hooks/useDocumentTitle.js",
       "source_location": "L11"
+    },
+    {
+      "id": "src_hooks_uselibrary_uselibrary",
+      "label": "useLibrary()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "react",
+      "file_type": "code",
+      "norm_label": "uselibrary()",
+      "source_file": "src/hooks/useLibrary.js",
+      "source_location": "L17"
     },
     {
       "id": "src_hooks_useplaybackstate_useplaybackstate",
@@ -635,18 +659,6 @@
       "source_location": "L14"
     },
     {
-      "id": "src_lib_spotifyapi_getdevices",
-      "label": "getDevices()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "react",
-      "file_type": "code",
-      "norm_label": "getdevices()",
-      "source_file": "src/lib/spotifyApi.js",
-      "source_location": "L234"
-    },
-    {
       "id": "src_lib_spotifyapi_getplaybackstate",
       "label": "getPlaybackState()",
       "_callable": true,
@@ -683,16 +695,16 @@
       "source_location": "L175"
     },
     {
-      "id": "src_lib_spotifyapi_transferplayback",
-      "label": "transferPlayback()",
+      "id": "src_lib_spotifyapi_getuserplaylists",
+      "label": "getUserPlaylists()",
       "_callable": true,
       "_origin": "ast",
       "community": 2,
       "community_name": "react",
       "file_type": "code",
-      "norm_label": "transferplayback()",
+      "norm_label": "getuserplaylists()",
       "source_file": "src/lib/spotifyApi.js",
-      "source_location": "L271"
+      "source_location": "L334"
     },
     {
       "id": "src_lib_spotifyauth_exchangecodefortoken",
@@ -947,6 +959,18 @@
       "source_location": "L15"
     },
     {
+      "id": "src_hooks_usedevices_usedevices",
+      "label": "useDevices()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "spotifyApi.js",
+      "file_type": "code",
+      "norm_label": "usedevices()",
+      "source_file": "src/hooks/useDevices.js",
+      "source_location": "L15"
+    },
+    {
       "id": "src_hooks_useplaybackcontrols_useplaybackcontrols",
       "label": "usePlaybackControls()",
       "_callable": true,
@@ -969,6 +993,30 @@
       "norm_label": "controlrequest()",
       "source_file": "src/lib/spotifyApi.js",
       "source_location": "L108"
+    },
+    {
+      "id": "src_lib_spotifyapi_getcurrentuserid",
+      "label": "getCurrentUserId()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "spotifyApi.js",
+      "file_type": "code",
+      "norm_label": "getcurrentuserid()",
+      "source_file": "src/lib/spotifyApi.js",
+      "source_location": "L307"
+    },
+    {
+      "id": "src_lib_spotifyapi_getdevices",
+      "label": "getDevices()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "spotifyApi.js",
+      "file_type": "code",
+      "norm_label": "getdevices()",
+      "source_file": "src/lib/spotifyApi.js",
+      "source_location": "L234"
     },
     {
       "id": "src_lib_spotifyapi_pauseplayback",
@@ -1077,6 +1125,18 @@
       "norm_label": "skipprevious()",
       "source_file": "src/lib/spotifyApi.js",
       "source_location": "L148"
+    },
+    {
+      "id": "src_lib_spotifyapi_transferplayback",
+      "label": "transferPlayback()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "spotifyApi.js",
+      "file_type": "code",
+      "norm_label": "transferplayback()",
+      "source_file": "src/lib/spotifyApi.js",
+      "source_location": "L271"
     },
     {
       "id": "src_components_depthcarousel_clamp",
@@ -1245,66 +1305,6 @@
       "norm_label": "gettopartists()",
       "source_file": "src/lib/spotifyApi.js",
       "source_location": "L469"
-    },
-    {
-      "id": "src_components_librarypanel_formatduration",
-      "label": "formatDuration()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "LibraryPanel.jsx",
-      "file_type": "code",
-      "norm_label": "formatduration()",
-      "source_file": "src/components/LibraryPanel.jsx",
-      "source_location": "L9"
-    },
-    {
-      "id": "src_components_librarypanel_librarypanel",
-      "label": "LibraryPanel()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "LibraryPanel.jsx",
-      "file_type": "code",
-      "norm_label": "librarypanel()",
-      "source_file": "src/components/LibraryPanel.jsx",
-      "source_location": "L24"
-    },
-    {
-      "id": "src_hooks_uselibrary_uselibrary",
-      "label": "useLibrary()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "LibraryPanel.jsx",
-      "file_type": "code",
-      "norm_label": "uselibrary()",
-      "source_file": "src/hooks/useLibrary.js",
-      "source_location": "L17"
-    },
-    {
-      "id": "src_lib_spotifyapi_getcurrentuserid",
-      "label": "getCurrentUserId()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "LibraryPanel.jsx",
-      "file_type": "code",
-      "norm_label": "getcurrentuserid()",
-      "source_file": "src/lib/spotifyApi.js",
-      "source_location": "L307"
-    },
-    {
-      "id": "src_lib_spotifyapi_getuserplaylists",
-      "label": "getUserPlaylists()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "LibraryPanel.jsx",
-      "file_type": "code",
-      "norm_label": "getuserplaylists()",
-      "source_file": "src/lib/spotifyApi.js",
-      "source_location": "L334"
     },
     {
       "id": "src_components_audiovisualizer_audiovisualizer",
@@ -2145,6 +2145,17 @@
       "source_location": "L20"
     },
     {
+      "id": "src_components_librarypanel",
+      "label": "LibraryPanel.jsx",
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "react",
+      "file_type": "code",
+      "norm_label": "librarypanel.jsx",
+      "source_file": "src/components/LibraryPanel.jsx",
+      "source_location": "L1"
+    },
+    {
       "id": "src_context_authcontext",
       "label": "AuthContext.jsx",
       "_origin": "ast",
@@ -2189,17 +2200,6 @@
       "source_location": "L1"
     },
     {
-      "id": "src_hooks_usedevices",
-      "label": "useDevices.js",
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "react",
-      "file_type": "code",
-      "norm_label": "usedevices.js",
-      "source_file": "src/hooks/useDevices.js",
-      "source_location": "L1"
-    },
-    {
       "id": "src_hooks_usedocumenttitle",
       "label": "useDocumentTitle.js",
       "_origin": "ast",
@@ -2208,6 +2208,17 @@
       "file_type": "code",
       "norm_label": "usedocumenttitle.js",
       "source_file": "src/hooks/useDocumentTitle.js",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_hooks_uselibrary",
+      "label": "useLibrary.js",
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "react",
+      "file_type": "code",
+      "norm_label": "uselibrary.js",
+      "source_file": "src/hooks/useLibrary.js",
       "source_location": "L1"
     },
     {
@@ -2354,6 +2365,17 @@
       "source_location": "L1"
     },
     {
+      "id": "src_hooks_usedevices",
+      "label": "useDevices.js",
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "spotifyApi.js",
+      "file_type": "code",
+      "norm_label": "usedevices.js",
+      "source_file": "src/hooks/useDevices.js",
+      "source_location": "L1"
+    },
+    {
       "id": "src_hooks_useplaybackcontrols",
       "label": "usePlaybackControls.js",
       "_origin": "ast",
@@ -2461,28 +2483,6 @@
       "file_type": "code",
       "norm_label": "usedex.js",
       "source_file": "src/hooks/useDex.js",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_components_librarypanel",
-      "label": "LibraryPanel.jsx",
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "LibraryPanel.jsx",
-      "file_type": "code",
-      "norm_label": "librarypanel.jsx",
-      "source_file": "src/components/LibraryPanel.jsx",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_hooks_uselibrary",
-      "label": "useLibrary.js",
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "LibraryPanel.jsx",
-      "file_type": "code",
-      "norm_label": "uselibrary.js",
-      "source_file": "src/hooks/useLibrary.js",
       "source_location": "L1"
     },
     {
@@ -3271,7 +3271,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/LibraryPanel.jsx",
-      "source_location": "L145",
+      "source_location": "L144",
       "weight": 1.0
     },
     {
@@ -3283,7 +3283,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/LibraryPanel.jsx",
-      "source_location": "L31",
+      "source_location": "L30",
       "weight": 1.0
     },
     {
@@ -3295,7 +3295,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/LibraryPanel.jsx",
-      "source_location": "L38",
+      "source_location": "L37",
       "weight": 1.0
     },
     {
@@ -3492,18 +3492,6 @@
     },
     {
       "source": "src_hooks_uselibrary_uselibrary",
-      "target": "src_lib_spotifyapi_getcurrentuserid",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "src/hooks/useLibrary.js",
-      "source_location": "L35",
-      "weight": 1.0
-    },
-    {
-      "source": "src_hooks_uselibrary_uselibrary",
       "target": "src_lib_spotifyapi_getuserplaylists",
       "relation": "calls",
       "_origin": "ast",
@@ -3511,7 +3499,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/hooks/useLibrary.js",
-      "source_location": "L38",
+      "source_location": "L32",
       "weight": 1.0
     },
     {
@@ -5036,18 +5024,6 @@
       "context": "import",
       "source_file": "src/hooks/useLibrary.js",
       "source_location": "L2",
-      "weight": 1.0
-    },
-    {
-      "source": "src_hooks_uselibrary",
-      "target": "src_lib_spotifyapi_getcurrentuserid",
-      "relation": "imports",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "import",
-      "source_file": "src/hooks/useLibrary.js",
-      "source_location": "L3",
       "weight": 1.0
     },
     {

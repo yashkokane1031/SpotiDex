@@ -6,6 +6,7 @@
   "4": "spotifyApi.js",
   "5": "DepthCarousel.jsx",
   "6": "useDex.js",
+  "7": "✨ What Makes SpotiDex Different?",
   "8": "💽 SpotiDex",
   "9": "AudioVisualizer.jsx",
   "10": "lyricsApi.js",
@@ -16,5 +17,7 @@
   "15": "Playlists Grid UI Screenshot",
   "16": "Playlists Tracklist UI Screenshot",
   "17": "Recently Played History UI Screenshot",
-  "18": "Q: create a Spotify playlist from current queue"
+  "18": "Q: create a Spotify playlist from current queue",
+  "19": "LibraryPanel.jsx",
+  "20": "vercel.json"
 }

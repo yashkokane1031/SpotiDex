@@ -1,11 +1,11 @@
 # Graph Report - SpotiDex  (2026-09-07)
 
 ## Corpus Check
-- 49 files · ~111,825 words
+- 49 files · ~111,544 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 250 nodes · 485 edges · 19 communities (14 shown, 5 thin omitted)
+- 250 nodes · 483 edges · 18 communities (13 shown, 5 thin omitted)
 - Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 9 edges (avg confidence: 0.87)
 - Token cost: 0 input · 0 output
 
@@ -22,7 +22,6 @@
 - spotifyApi.js
 - DepthCarousel.jsx
 - useDex.js
-- LibraryPanel.jsx
 - 💽 SpotiDex
 - AudioVisualizer.jsx
 - lyricsApi.js
@@ -56,8 +55,8 @@
   README.md → index.html
 - `App()` --calls--> `useAuth()`  [EXTRACTED]
   src/App.jsx → src/context/AuthContext.jsx
-- `NowPlayingView()` --calls--> `useDex()`  [EXTRACTED]
-  src/App.jsx → src/hooks/useDex.js
+- `NowPlayingView()` --calls--> `useDevices()`  [EXTRACTED]
+  src/App.jsx → src/hooks/useDevices.js
 
 ## Import Cycles
 - None detected.
@@ -67,7 +66,7 @@
 - **Client-Side PKCE OAuth Flow** — src_lib_pkce_generatecodeverifier, src_lib_spotifyauth_redirecttospotifyauth, src_context_authcontext_authprovider, src_pages_callback_callback [INFERRED 0.85]
 - **Tactile Turntable & Playback Controls Flow** — src_components_vinylrecord_vinylrecord [INFERRED 0.85]
 
-## Communities (19 total, 5 thin omitted)
+## Communities (18 total, 5 thin omitted)
 
 ### Community 0 - "App.jsx"
 Cohesion: 0.07
@@ -79,15 +78,15 @@ Nodes (30): dependencies, gsap, node-vibrant, react, react-dom, react-router-dom
 
 ### Community 2 - "react"
 Cohesion: 0.12
-Nodes (29): react, react-router-dom, NowPlayingView(), AuthContext, AuthProvider(), rehydrate(), STORAGE_KEYS, useAuth() (+21 more)
+Nodes (30): react, react-router-dom, NowPlayingView(), formatDuration(), LibraryPanel(), AuthContext, AuthProvider(), rehydrate() (+22 more)
 
 ### Community 3 - "extractPalette.js"
 Cohesion: 0.24
 Nodes (18): applyPalette(), DEFAULT_PALETTE, ThemeContext, ThemeProvider(), anyAvailableRgb(), contrastRatio(), darken(), ensureContrast() (+10 more)
 
 ### Community 4 - "spotifyApi.js"
-Cohesion: 0.50
-Nodes (11): usePlaybackControls(), controlRequest(), pausePlayback(), playContext(), playTracks(), resumePlayback(), setRepeat(), setShuffle() (+3 more)
+Cohesion: 0.32
+Nodes (14): useDevices(), usePlaybackControls(), controlRequest(), getDevices(), pausePlayback(), playContext(), playTracks(), resumePlayback() (+6 more)
 
 ### Community 5 - "DepthCarousel.jsx"
 Cohesion: 0.25
@@ -96,10 +95,6 @@ Nodes (7): Playing Next Queue Carousel UI Screenshot, gsap, clamp(), DEFAULT_ITE
 ### Community 6 - "useDex.js"
 Cohesion: 0.33
 Nodes (9): ArtistDetailModal(), DexPanel(), formatDate(), NewEntryToast(), formatDexNumber(), getRarityTier(), useDex(), getArtistsBatch() (+1 more)
-
-### Community 7 - "LibraryPanel.jsx"
-Cohesion: 0.52
-Nodes (5): formatDuration(), LibraryPanel(), useLibrary(), getCurrentUserId(), getUserPlaylists()
 
 ### Community 8 - "💽 SpotiDex"
 Cohesion: 0.06
@@ -127,14 +122,14 @@ Nodes (4): Answer, Outcome, Q: create a Spotify playlist from current queue, Sou
 
 ## Knowledge Gaps
 - **73 isolated node(s):** `$schema`, `plugins`, `react/rules-of-hooks`, `react/only-export-components`, `name` (+68 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 89 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 90 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
 - **5 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `react` connect `react` to `App.jsx`, `package.json`, `extractPalette.js`, `spotifyApi.js`, `DepthCarousel.jsx`, `useDex.js`, `LibraryPanel.jsx`, `AudioVisualizer.jsx`, `lyricsApi.js`?**
-  _High betweenness centrality (0.265) - this node is a cross-community bridge._
+- **Why does `react` connect `react` to `App.jsx`, `package.json`, `extractPalette.js`, `spotifyApi.js`, `DepthCarousel.jsx`, `useDex.js`, `AudioVisualizer.jsx`, `lyricsApi.js`?**
+  _High betweenness centrality (0.264) - this node is a cross-community bridge._
 - **Why does `💽 SpotiDex` connect `💽 SpotiDex` to `App.jsx`, `react`?**
   _High betweenness centrality (0.219) - this node is a cross-community bridge._
 - **Are the 3 inferred relationships involving `💽 SpotiDex` (e.g. with `App.jsx` and `main.jsx`) actually correct?**
@@ -146,4 +141,4 @@ _Questions this graph is uniquely positioned to answer:_
 - **Should `package.json` be split into smaller, more focused modules?**
   _Cohesion score 0.06653225806451613 - nodes in this community are weakly interconnected._
 - **Should `react` be split into smaller, more focused modules?**
-  _Cohesion score 0.12195121951219512 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.11517165005537099 - nodes in this community are weakly interconnected._

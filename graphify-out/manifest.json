@@ -276,10 +276,10 @@
     "semantic_hash": "9d718dda084e440fee59e2bcfde3a0bb"
   },
   "README.md": {
-    "mtime": 1788682191.627879,
-    "seen": 1788787799.727167,
-    "ast_hash": "16994de6cb6fdbd332d2580d8c6eb499",
-    "semantic_hash": "16994de6cb6fdbd332d2580d8c6eb499"
+    "mtime": 1788792031.6337125,
+    "seen": 1788795075.8197405,
+    "ast_hash": "e468728f9861031352aea4b650975da5",
+    "semantic_hash": ""
   },
   "index.html": {
     "mtime": 1788678197.116583,
@@ -381,6 +381,12 @@
     "mtime": 1786113291.803236,
     "seen": 1788790167.7902951,
     "ast_hash": "9960a24288958394ac50e57ff638b036",
+    "semantic_hash": ""
+  },
+  "vercel.json": {
+    "mtime": 1788795043.7185006,
+    "seen": 1788795075.8197355,
+    "ast_hash": "61bd31a2b0ac08f10f13c932b32d6ca1",
     "semantic_hash": ""
   }
 }
